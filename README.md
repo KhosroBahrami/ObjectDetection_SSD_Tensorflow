@@ -30,6 +30,9 @@ pip install matplotlib
 pip install opencv-python
 ```
 
+## Datasets
+The Pascal VOC datasets (2007 and 2012). 
+
 
 ## Demo of SSD
 ```python
@@ -53,6 +56,16 @@ python3 ssd_test.py
 python3 ssd_train.py
 
 ```
+
+
+
+# Understanding SSD
+SSD is designed for object detection in real-time whish has one step. In contrast, Faster R-CNN uses a region proposal network and has two steps for object detection. SSD speeds up the process by eliminating the need of the region proposal network. To recover the drop in accuracy, SSD applies a few improvements including multi-scale features and default boxes. These improvements allow SSD to match the Faster R-CNN’s accuracy using lower resolution images, which further pushes the speed higher. According to the following comparison, it achieves the real-time processing speed and even beats the accuracy of the Faster R-CNN. (Accuracy is measured as the mean average precision mAP: the precision of the predictions.)
+
+
+
+
+
 
 
 
