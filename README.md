@@ -9,8 +9,7 @@ This is a pipeline of Single Shot Detector (SSD) for object detection based on t
 This implementation is designed with these goals:
 ###### Pipeline: has full pipeline of object detection for demo, test and train.
 ###### Backbone Networks: has 7 backbone network for SSD including: VGG, ResnetV1, ResnetV2, MobilenetV1, MobilenetV2, InceptionV4, InceptionResnetV2. 
-###### Readability. The code should be clear and consistent.
-###### Modularization. The whole system should be modularized and easy to expand with new ideas.
+###### Modularity: This code is modular and easy to expand with new ideas.
 
  
 The main requirements can be installed by:
