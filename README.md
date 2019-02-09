@@ -31,7 +31,7 @@ pip install opencv-python
 ```
 
 
-## Demo
+## Demo of SSD
 ```python
 # Run demo of SSD for one image
 python3 ssd_demo.py
@@ -39,7 +39,7 @@ python3 ssd_demo.py
 ```
 
 
-## Test
+## Evaluating SSD 
 ```python
 # Run test of SSD
 python3 ssd_test.py
@@ -47,7 +47,7 @@ python3 ssd_test.py
 ```
 
 
-## Train
+## Training SSD
 ```python
 # Run training of SSD
 python3 ssd_train.py
