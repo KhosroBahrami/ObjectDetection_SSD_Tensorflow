@@ -43,8 +43,6 @@ MOBILENETV1_CONV_DEFS = [
     DepthSepConv(kernel=[3, 3], stride=1, depth=512),
     DepthSepConv(kernel=[3, 3], stride=1, depth=512),
     DepthSepConv(kernel=[3, 3], stride=1, depth=512)
-    #DepthSepConv(kernel=[3, 3], stride=2, depth=1024),
-    #DepthSepConv(kernel=[3, 3], stride=1, depth=1024)
 ]
 
 
@@ -240,11 +238,11 @@ class SSD_network(object):
           # khosro
           return net, end_points
         
-      #raise ValueError('Unknown final endpoint %s' % final_endpoint)
 
 
 
-    def mobilenet_v1(self, inputs,
+    def net(self, inputs,
+    #def mobilenet_v1(self, inputs,
                      num_classes=1000,
                      dropout_keep_prob=0.999,
                      is_training=True,
@@ -269,35 +267,12 @@ class SSD_network(object):
           with slim.arg_scope([slim.batch_norm, slim.dropout], is_training=is_training):
               net, end_points = self.mobilenet_v1_base(inputs, scope=scope, min_depth=min_depth,
                                                   depth_multiplier=depth_multiplier, conv_defs=conv_defs)
-              '''
-              with tf.variable_scope('Logits'):
-                  if global_pool:
-                      # Global average pooling.
-                      net = tf.reduce_mean(net, [1, 2], keep_dims=True, name='global_pool')
-                      end_points['global_pool'] = net
-                  else:
-                      # Pooling with a fixed kernel size.
-                      kernel_size = self._reduced_kernel_size_for_small_input(net, [7, 7])
-                      net = slim.avg_pool2d(net, kernel_size, padding='VALID', scope='AvgPool_1a')
-                      end_points['AvgPool_1a'] = net
-                  if not num_classes:
-                      return net, end_points
-                  # 1 x 1 x 1024
-                  net = slim.dropout(net, keep_prob=dropout_keep_prob, scope='Dropout_1b')
-                  logits = slim.conv2d(net, num_classes, [1, 1], activation_fn=None,
-                                       normalizer_fn=None, scope='Conv2d_1c_1x1')
-                  if spatial_squeeze:
-                      logits = tf.squeeze(logits, [1, 2], name='SpatialSqueeze')
-              end_points['Logits'] = logits
-              if prediction_fn:
-                  end_points['Predictions'] = prediction_fn(logits, scope='Predictions')
-              '''
+
       r = self.ssd_multibox_layer(end_points)
-      #return logits, end_points
       return r
 
 
-    mobilenet_v1.default_image_size = 224
+
 
 
     def _fixed_padding(self, inputs, kernel_size, rate=1):
@@ -333,9 +308,7 @@ class SSD_network(object):
       return partial_func
 
 
-    #mobilenet_v1_075 = wrapped_partial(mobilenet_v1, depth_multiplier=0.75)
-    #mobilenet_v1_050 = wrapped_partial(mobilenet_v1, depth_multiplier=0.50)
-    #mobilenet_v1_025 = wrapped_partial(mobilenet_v1, depth_multiplier=0.25)
+
 
 
     def _reduced_kernel_size_for_small_input(self, input_tensor, kernel_size):

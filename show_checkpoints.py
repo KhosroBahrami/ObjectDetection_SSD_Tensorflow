@@ -79,4 +79,13 @@ for v in sorted(var_to_shape_map):
 
 
 
+print('\n\n squeeznet :')
+reader = pywrap_tensorflow.NewCheckpointReader('checkpoints/squeezeNet/squeezenet_v1.1.pkl')
+var_to_shape_map = reader.get_variable_to_shape_map()
+#saver = tf.train.Saver()
+print('\n')
+for v in sorted(var_to_shape_map):
+   print(v)
+
+
    

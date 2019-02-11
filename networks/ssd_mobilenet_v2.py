@@ -71,11 +71,6 @@ V2_DEF = dict(
         op(ops.expanded_conv, stride=1, num_outputs=96),
         op(ops.expanded_conv, stride=1, num_outputs=96),
         op(ops.expanded_conv, stride=1, num_outputs=96),
-        #op(ops.expanded_conv, stride=2, num_outputs=160),
-        #op(ops.expanded_conv, stride=1, num_outputs=160),
-        #op(ops.expanded_conv, stride=1, num_outputs=160),
-        #op(ops.expanded_conv, stride=1, num_outputs=320),
-        #op(slim.conv2d, stride=1, kernel_size=[1, 1], num_outputs=1280)
     ],
 )
 # pyformat: enable
@@ -154,8 +149,9 @@ class SSD_network(object):
 
  
 
-    @slim.add_arg_scope
-    def mobilenet_v2(self, input_tensor,
+    def net(self, input_tensor,
+    #@slim.add_arg_scope
+    #def mobilenet_v2(self, input_tensor,
                   num_classes=1001,
                   depth_multiplier=1.0,
                   scope='MobilenetV2',
@@ -247,13 +243,6 @@ class SSD_network(object):
       return partial_func
 
 
-    # Wrappers for mobilenet v2 with depth-multipliers. Be noticed that
-    # 'finegrain_classification_mode' is set to True, which means the embedding
-    # layer will not be shrinked when given a depth-multiplier < 1.0.
-    
-    #mobilenet_v2_140 = wrapped_partial(mobilenet, depth_multiplier=1.4)
-    #mobilenet_v2_050 = wrapped_partial(mobilenet, depth_multiplier=0.50, finegrain_classification_mode=True)
-    #mobilenet_v2_035 = wrapped_partial(mobilenet, depth_multiplier=0.35, finegrain_classification_mode=True)
 
 
     @slim.add_arg_scope

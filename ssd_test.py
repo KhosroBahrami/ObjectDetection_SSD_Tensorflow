@@ -8,7 +8,6 @@ from postprocessing.postprocessing import *
 from evaluation.evaluation import *
 from configs.config_test import *
 from configs.config_common import *
-
 DATA_FORMAT = 'NHWC'
 
 # main module for evaluation of SSD
@@ -74,8 +73,7 @@ def main():
         with tf.name_scope(None, "Inference") as scope:
             print('\n4) Inference...')
             with slim.arg_scope(network.arg_scope(data_format=DATA_FORMAT)):
-                 #predictions, localisations, logits, end_points = network.net(b_image, training=False)
-                 predictions, localisations, logits, end_points = network.mobilenet_v1(b_image, is_training=False)
+                 predictions, localisations, logits, end_points = network.net(b_image, training=False)
 
 
         

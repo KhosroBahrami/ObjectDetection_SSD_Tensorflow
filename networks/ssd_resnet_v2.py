@@ -131,13 +131,14 @@ class SSD_network(object):
         residual = slim.conv2d(residual, depth, [1, 1], stride=1,
                                normalizer_fn=None, activation_fn=None,
                                scope='conv3')
-
         output = shortcut + residual
-
         return slim.utils.collect_named_outputs(outputs_collections, sc.name, output)
 
 
-    def resnet_v2(self, inputs,
+
+
+    #def resnet_v2(self, inputs,
+    def net(self, inputs,
                   blocks,
                   num_classes=None,
                   is_training=True,

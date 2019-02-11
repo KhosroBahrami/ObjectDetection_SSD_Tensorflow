@@ -158,7 +158,8 @@ class SSD_network(object):
                                                 output)
 
 
-    def resnet_v1(self, inputs,
+    #def resnet_v1(self, inputs,
+    def net(self, inputs,
                   blocks,
                   num_classes=None,
                   is_training=True,

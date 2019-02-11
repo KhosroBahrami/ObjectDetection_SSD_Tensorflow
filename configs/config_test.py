@@ -1,6 +1,7 @@
 
 # Config of test
 import tensorflow as tf
+from configs.config_general import backbone_network
 slim = tf.contrib.slim
 
 # Dataset  
@@ -8,8 +9,23 @@ tf.app.flags.DEFINE_string('test_eval_dir', './tmp/tfmodel/', 'Directory where t
 tf.app.flags.DEFINE_string('test_dataset_path', './tfrecords_test/', 'path of test dataset.')
 tf.app.flags.DEFINE_string('test_dataset_name', 'pascalvoc_2007', 'The name of the dataset to load.')
 
-#tf.app.flags.DEFINE_string('test_checkpoint_path', './checkpoints/vgg/ssd_300_vgg.ckpt','path of checkpoint file.')
-tf.app.flags.DEFINE_string('test_checkpoint_path', './checkpoints/ssd_mobilenet_v1/model.ckpt-10518','path of checkpoint file.')
+
+if backbone_network == 'ssd_vgg_300':
+   tf.app.flags.DEFINE_string('test_checkpoint_path', './checkpoints/ssd_vgg/ssd_300_vgg.ckpt','path of checkpoint file.')
+elif backbone_network == 'ssd_mobilenet_v1':
+   tf.app.flags.DEFINE_string('test_checkpoint_path', './checkpoints/ssd_mobilenet_v1/model.ckpt','path of checkpoint file.')
+elif backbone_network == 'ssd_mobilenet_v2':
+   tf.app.flags.DEFINE_string('test_checkpoint_path', './checkpoints/ssd_mobilenet_v2/model.ckpt','path of checkpoint file.')
+elif backbone_network == 'ssd_resnet_v1':
+   tf.app.flags.DEFINE_string('test_checkpoint_path', './checkpoints/ssd_resnet_v1/model.ckpt','path of checkpoint file.')
+elif backbone_network == 'ssd_resnet_v2':
+   tf.app.flags.DEFINE_string('test_checkpoint_path', './checkpoints/ssd_resnet_v2/model.ckpt','path of checkpoint file.')
+elif backbone_network == 'ssd_inception_v4':
+   tf.app.flags.DEFINE_string('test_checkpoint_path', './checkpoints/ssd_inception_v4/model.ckpt','path of checkpoint file.')
+elif backbone_network == 'ssd_inception_resent_v2':
+   tf.app.flags.DEFINE_string('test_checkpoint_path', './checkpoints/ssd_inception_resent_v2/model.ckpt','path of checkpoint file.')
+
+
 
 tf.app.flags.DEFINE_float('test_gpu_memory_fraction', 0.1, 'GPU memory fraction to use.')
 

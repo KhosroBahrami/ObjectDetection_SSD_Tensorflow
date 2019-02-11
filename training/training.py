@@ -7,8 +7,8 @@ from deployment import model_deploy
 from networks import network_factory
 DATA_FORMAT = 'NHWC'
 from configs.config_train import *
-
 import tensorflow.contrib.slim.nets 
+from configs.config_general import backbone_network
 
 
 class Training(object):
@@ -33,55 +33,42 @@ class Training(object):
                 # Network inference               
                 with slim.arg_scope(arg_scope):
 
-                        # VGG
-                        #predictions, localisations, logits, outputs = network.net(b_image, training=True)
+                        if backbone_network == 'ssd_vgg_300': # VGG
+                                predictions, localisations, logits, outputs = network.net(b_image, training=True)
 
-                        # MobilenetV1
-                        #predictions, localisations, logits, outputs = network.mobilenet_v1(b_image, is_training=True)
+                        elif backbone_network == 'ssd_mobilenet_v1': # MobilenetV1
+                                predictions, localisations, logits, outputs = network.net(b_image, is_training=True)
 
-                        # MobilenetV2
-                        #predictions, localisations, logits, outputs = network.mobilenet_v2(b_image, is_training=True)
-                        '''
-                        # ResnetV1
-                        block = network.resnet_v1_block
-                        blocks = [
-                        block('block1', base_depth=1, num_units=2, stride=2),
-                        block('block2', base_depth=2, num_units=2, stride=2),
-                        block('block3', base_depth=4, num_units=2, stride=2),
-                        block('block4', base_depth=8, num_units=2, stride=1),
-                        ]
-                        predictions, localisations, logits, outputs = network.resnet_v1(b_image, blocks, is_training=True)
+                        elif backbone_network == 'ssd_mobilenet_v2': # MobilenetV2
+                                predictions, localisations, logits, outputs = network.net(b_image, is_training=True)
 
-                        '''
-                        '''
-                        # ResnetV2
-                        block = network.resnet_v2_block
-                        blocks = [
-                        block('block1', base_depth=1, num_units=2, stride=2),
-                        block('block2', base_depth=2, num_units=2, stride=2),
-                        block('block3', base_depth=4, num_units=2, stride=2),
-                        block('block4', base_depth=8, num_units=2, stride=1),
-                        ]
-                        predictions, localisations, logits, outputs = network.resnet_v2(b_image, blocks, is_training=True)
-                        '''
-                        
-                        # InceptionV4
-                        #predictions, localisations, logits, outputs = network.inception_v4(b_image, is_training=True)
+                        elif backbone_network == 'ssd_resnet_v1': # ResnetV1
+                                block = network.resnet_v1_block
+                                blocks = [
+                                block('block1', base_depth=1, num_units=2, stride=2),
+                                block('block2', base_depth=2, num_units=2, stride=2),
+                                block('block3', base_depth=4, num_units=2, stride=2),
+                                block('block4', base_depth=8, num_units=2, stride=1),]
+                                predictions, localisations, logits, outputs = network.net(b_image, blocks, is_training=True)
 
-                        # InceptionResnetV2
-                        predictions, localisations, logits, outputs = network.inception_resnet_v2(b_image, is_training=True)
+                        elif backbone_network == 'ssd_resnet_v2': # ResnetV2
+                                block = network.resnet_v2_block
+                                blocks = [
+                                block('block1', base_depth=1, num_units=2, stride=2),
+                                block('block2', base_depth=2, num_units=2, stride=2),
+                                block('block3', base_depth=4, num_units=2, stride=2),
+                                block('block4', base_depth=8, num_units=2, stride=1),]
+                                predictions, localisations, logits, outputs = network.net(b_image, blocks, is_training=True)
+
+                        elif backbone_network == 'ssd_inception_v4': # InceptionV4
+                                predictions, localisations, logits, outputs = network.net(b_image, is_training=True)
+
+                        elif backbone_network == 'ssd_inception_resnet_v2': # InceptionResnetV2
+                                predictions, localisations, logits, outputs = network.net(b_image, is_training=True)
 
 
 
-
-                #with slim.arg_scope(slim.nets.inception.inception_v3_arg_scope()):
-                #    logits, endpoints = slim.nets.inception.inception_v3(b_image, num_classes=1001, is_training=False)
-                #for v in sorted(endpoints):
-                #    print(v)
-                #print('\n******************\n')
-
-
-                # Add loss to network
+                  # Add loss to network
                 network.losses(logits, localisations, b_gclasses, b_glocalisations, b_gscores,
                                    match_threshold=FLAGS.train_match_threshold, negative_ratio=FLAGS.train_negative_ratio,
                                    alpha=FLAGS.train_loss_alpha, label_smoothing=FLAGS.train_label_smoothing)

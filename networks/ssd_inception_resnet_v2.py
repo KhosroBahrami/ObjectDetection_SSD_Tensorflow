@@ -22,9 +22,6 @@ slim = tf.contrib.slim
 
 
 
-
-
-
 class SSD_network(object):
 
     def __init__(self): 
@@ -44,8 +41,6 @@ class SSD_network(object):
 
 
  
-            
-
 
 
     # The multibox layer of SSD
@@ -358,7 +353,10 @@ class SSD_network(object):
 
 
 
-    def inception_resnet_v2(self, inputs, num_classes=1001, is_training=True,
+
+
+    #def inception_resnet_v2(self, inputs, num_classes=1001, is_training=True,
+    def net(self, inputs, num_classes=1001, is_training=True,
                             dropout_keep_prob=0.8,
                             reuse=None,
                             scope='InceptionResnetV2',

@@ -46,11 +46,9 @@ def main():
          print('  loaded model: ',FLAGS.model_name)
          network = network_factory.load_network(FLAGS.model_name)
          with slim.arg_scope(network.arg_scope(data_format=FLAGS.demo_data_format)):
-             #predictions, localisations, _, _ = network.net(image, training=False)
-             predictions, localisations, _, _ = network.mobilenet_v1(image, is_training=False) 
+             predictions, localisations, _, _ = network.net(image, training=False)
 
          # Restore SSD model.
-         #sess.run(tf.global_variables_initializer())
          saver = tf.train.Saver()
          saver.restore(sess, FLAGS.demo_checkpoint_path)
 

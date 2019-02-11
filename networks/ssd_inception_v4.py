@@ -313,7 +313,9 @@ class SSD_network(object):
 
 
 
-    def inception_v4(self, inputs, num_classes=1001, is_training=True,
+
+    #def inception_v4(self, inputs, num_classes=1001, is_training=True,
+    def net(self, inputs, num_classes=1001, is_training=True,
                      dropout_keep_prob=0.8,
                      reuse=None,
                      scope='InceptionV4',
@@ -345,19 +347,7 @@ class SSD_network(object):
 
           print(' -- ',net.shape)
 
-
-
-          '''
-          # Block 8: 1 conv (1*1), 1 conv (3*3)
-          block = 'block12'
-          with tf.variable_scope(block):
-            net = slim.conv2d(net, 256, [1, 1], scope='conv1x1')
-            net = self.pad2d(net, pad=(1, 1))
-            net = slim.conv2d(net, 512, [3, 3], stride=2, scope='conv3x3', padding='VALID')
-          print(block,net.shape)
-          end_points[block] = net
-          '''
-          
+           
           # Block 9: 1 conv (1*1), 1 conv (3*3) 
           block = 'block13'
           with tf.variable_scope(block):
@@ -374,21 +364,7 @@ class SSD_network(object):
             net = slim.conv2d(net, 256, [3, 3], scope='conv3x3', padding='VALID')
           print(block,net.shape)
           end_points[block] = net
-          '''
-          # Block 11: 1 conv (1*1), 1 conv (3*3) 
-          block = 'block15'
-          with tf.variable_scope(block):
-            net = slim.conv2d(net, 128, [1, 1], scope='conv1x1')
-            net = slim.conv2d(net, 256, [3, 3], scope='conv3x3', padding='VALID')
-          print(block,net.shape)
-          end_points[block] = net
-          '''
-
-
-
-
-
-          
+       
 
           with slim.arg_scope([slim.conv2d, slim.max_pool2d, slim.avg_pool2d], stride=1, padding='SAME'):
             # Auxiliary Head logits
@@ -430,11 +406,8 @@ class SSD_network(object):
         r = self.ssd_multibox_layer(end_points)
         return r
               
-        #return logits, end_points
-    #inception_v4.default_image_size = 299
 
 
-    #inception_v4_arg_scope = inception_utils.inception_arg_scope
 
 
 
