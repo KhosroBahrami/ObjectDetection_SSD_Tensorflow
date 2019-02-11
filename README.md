@@ -29,6 +29,7 @@ The Pascal VOC datasets (2007 and 2012).
 
 
 ## Demo of SSD
+To run the demo, use the following command:
 ```python
 # Run demo of SSD for one image
 python3 ssd_demo.py
@@ -37,6 +38,7 @@ python3 ssd_demo.py
 
 
 ## Evaluating SSD 
+To test the SSD, use the following command:
 ```python
 # Run test of SSD
 python3 ssd_test.py
@@ -45,6 +47,7 @@ python3 ssd_test.py
 
 
 ## Training SSD
+To train the SSD, use the following command:
 ```python
 # Run training of SSD
 python3 ssd_train.py
