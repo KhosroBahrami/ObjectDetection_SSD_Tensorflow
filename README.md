@@ -60,19 +60,27 @@ SSD is designed for object detection in real-time whish has one step. In contras
 
 
 
-## Backbone: 
+## Using backbone networks in SSD: 
+In this section, I explain the details of how I used different backbone networks for SSD object detection.   
+
 
 ### VGG
 
+
 ### ResnetV1
+
 
 ### ResnetV2
 
+
 ### MobilenetV1
+
 
 ### MobilenetV2
 
+
 ### InceptionV4
+
 
 ### InceptionResnetV2
 
