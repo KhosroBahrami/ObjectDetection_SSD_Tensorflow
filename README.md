@@ -67,7 +67,7 @@ To train the SSD, use the following command:
 # Run training of SSD
 python3 ssd_train.py
 ```
-The Training module has the following 6 steps:
+The Training module has the following 4 steps:
 1) Data preparation
 2) Preprocessing step
 3) Create SSD model
