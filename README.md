@@ -33,8 +33,15 @@ To run the demo, use the following command:
 ```python
 # Run demo of SSD for one image
 python3 ssd_demo.py
-
 ```
+
+The Demo module has the following 6 steps:
+##### 1) Define a placeholder for the input image 
+##### 2) Preprocessing step
+##### 3) Create SSD model
+##### 4) Inference, calculate output of network
+##### 5) Postprocessing
+##### 6) Visualization & Evaluation
 
 
 ## Evaluating SSD 
