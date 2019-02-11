@@ -17,14 +17,8 @@ This is a pipeline of Single Shot Detector (SSD) for object detection based on t
 The main requirements can be installed by:
 
 ```bash
-# pip install tensorflow    # For CPU
+pip install tensorflow    # For CPU
 pip install tensorflow-gpu  # For GPU
-
-# Install scipy for loading mat files
-pip install scipy
-
-# Install matplotlib for visualizing tracking results
-pip install matplotlib
 
 # Install opencv for preprocessing training examples
 pip install opencv-python
@@ -66,6 +60,21 @@ SSD is designed for object detection in real-time whish has one step. In contras
 
 
 
+## Backbone: 
+
+### VGG
+
+### ResnetV1
+
+### ResnetV2
+
+### MobilenetV1
+
+### MobilenetV2
+
+### InceptionV4
+
+### InceptionResnetV2
 
 
 
