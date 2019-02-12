@@ -53,12 +53,14 @@ Before running the code, you need to touch the configuration based on your needs
 
 
 ## Demo of SSD
+Demo uses the pretrained model that has been stored in /checkpoints/ssd_... .
+
 To run the demo, use the following command:
 ```python
 # Run demo of SSD for one image
 python3 ssd_demo.py
 ```
-Demo uses the pretrained model that has been stored in /checkpoints/ssd_... .The Demo module has the following 6 steps:
+The Demo module has the following 6 steps:
 1) Define a placeholder for the input image 
 2) Preprocessing step
 3) Create SSD model
@@ -68,12 +70,14 @@ Demo uses the pretrained model that has been stored in /checkpoints/ssd_... .The
 
 
 ## Evaluating SSD 
+Test module uses the pretrained model that has been stored in /checkpoints/ssd_... . 
+
 To test the SSD, use the following command:
 ```python
 # Run test of SSD
 python3 ssd_test.py
 ```
-Test module uses the pretrained model that has been stored in /checkpoints/ssd_... . Evaluation module has the following 6 steps:
+Evaluation module has the following 6 steps:
 1) Data preparation
 2) Preprocessing step
 3) Create SSD model
@@ -86,9 +90,10 @@ Test module uses the pretrained model that has been stored in /checkpoints/ssd_.
 
 ## Training SSD
 We have 3 modes for training:
-- Traning an existing SSD boject detection for a spacific dataset or new sets of parameters. 
+- Training an existing SSD boject detection for a spacific dataset or new sets of parameters. 
 - Training (first step fine-tuning) SSD based on an existing ImageNet classification model.
 - Training (second step fine-tuning) SSD based on an existing ImageNet classification model.
+
 The mode should be specified in configs/config_general.py.
 
 The input of training should be in /checkpoints/[model_name]
