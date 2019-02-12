@@ -126,19 +126,19 @@ In SSD, the CNN backbone network (VGG, Mobilenet, ...) gradually shrinks the fea
 For example, for VGG backbone network, the first feature map is generated from layer 23 with a size of 38x38 of depth 512. Every point in the 38x38 feature map represents a part of the image, and the 512 channels are the features for every point. By using the features of 512 channels, we can predict the class label (using classification) and the bounding box (using regression) of the small objects on every point. The second feature map has a size of 19x19, which can be used for larger objects, as the points of the features cover larger receptive fields. Finally, in the last layer, there is only one point in the feature map which is used for big objects.
 
 | Layer | Feature Size |
-------------------------
+|-------|--------------|
 |       |      38      |
-------------------------
+|-------|--------------|
 |       |      19      |
-------------------------
+|-------|--------------|
 |       |      19      |
-------------------------
+|-------|--------------|
 |       |      5      |
-------------------------
+|-------|--------------|
 |       |      3      |
-------------------------
+|-------|--------------|
 |       |      1      |
-------------------------
+|-------|--------------|
 
 # Using backbone networks in SSD: 
 In this section, I explain the details of how I used different backbone networks for SSD object detection.   
