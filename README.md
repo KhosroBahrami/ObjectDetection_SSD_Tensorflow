@@ -41,7 +41,7 @@ $ tar -xvf VOCtrainval_06-Nov-2007.tar
 $ tar -xvf VOCtest_06-Nov-2007.tar
 $ python3 ssd_image_to_tf.py
 ```
-This stores the data into tfrecords_test and tfrecords_train folders.
+The resulted tf records will be stored into tfrecords_test and tfrecords_train folders.
 
 
 ## Demo of SSD
