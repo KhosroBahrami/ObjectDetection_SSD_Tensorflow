@@ -148,9 +148,13 @@ The loss function is the combination of classification loss and regression loss.
 ### Image Augmentation
 
 ### Match Priors with Ground-Truth Boxes
+The criterion for matching a prior and a ground-truth box is IoU (Intersection Over Union), which is also called Jaccard index. The more overlap, the better match.
+Also, to have the same block size, the ground-truth boxes should be scaled to the same scale.
 
 
 ### Hard Negative Mining
+In the matching phase, we match ground-truth bounding boxes (with objects) to multiple priors. However there are a lot more unmatched priors (priors without any object). In other words, the huge number of priors labelled as background make the dataset very unbalanced. To make the dataset more balanced, Hard Negative Mining is often used. The idea is only count the background priors with highest confidence into the computation of total loss function. The others are ignored. The ratio between background priors and matched priors becomes much lower (The ratio is 3).
+
 
 
 ### Non Maxmimum Supression (NMS)
