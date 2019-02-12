@@ -43,6 +43,14 @@ $ python3 ssd_image_to_tf.py
 ```
 The resulted tf records will be stored into tfrecords_test and tfrecords_train folders.
 
+## Configuration
+Before running the code, you need to touch the configuration based on your needs. We have 5 config file in /configs:
+- config_general.py: in this file, you can indicate the backbone model that you want to use for train, test and demo. You should uncomment only one of the models to use as backbone. Also, you can indicate the traning mode. 
+- config_general.py: this file includes the common parameters that are used in training, testing and demo.   
+- config_train.py: this file includes training parameters.  
+- config_test.py: this file includes testing parameters.  
+- config_demo.py: this file includes demo parameters.  
+
 
 ## Demo of SSD
 To run the demo, use the following command:
