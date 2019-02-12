@@ -118,8 +118,12 @@ The Training module has the following 4 steps:
 
 
 # Understanding SSD
-SSD is designed for object detection in real-time whish has one step. In contrast, Faster R-CNN uses a region proposal network and has two steps for object detection. SSD speeds up the process by eliminating the need of the region proposal network. To recover the drop in accuracy, SSD applies a few improvements including multi-scale features and default boxes. These improvements allow SSD to match the Faster R-CNN’s accuracy using lower resolution images, which further pushes the speed higher. According to the following comparison, it achieves the real-time processing speed and even beats the accuracy of the Faster R-CNN. (Accuracy is measured as the mean average precision mAP: the precision of the predictions.)
+SSD is designed for object detection in real-time which has one step. In contrast, Faster R-CNN uses a region proposal network and has two steps for object detection. SSD speeds up the process by eliminating the need of the region proposal network. To recover the drop in accuracy, SSD applies a few improvements including multi-scale features and default boxes. These improvements allow SSD to match the Faster R-CNN’s accuracy using lower resolution images, which further pushes the speed higher. According to the following comparison, it achieves the real-time processing speed and even beats the accuracy of the Faster R-CNN. (Accuracy is measured as the mean average precision mAP: the precision of the predictions.)
 
+
+In SSD, the CNN backbone network (VGG, Mobilenet, ...) gradually shrinks the feature map size and increase the depth as it goes to the deeper layers. The deep layers cover larger receptive fields and construct more abstract representation, while the shallow layers cover smaller receptive fields. By using extracted features at different levels, we can use shallow layers to predict small objects and deeper layers to predict large objects.
+
+For example, for VGG backbone network, the first feature map set is generated from VGG net layer 23, and have a size of 38x38 of depth 512. Every point in the 38x38 feature map covers a part of the image, and the 512 channels can be the features for every point. By using the features in the 512 channels, we can predict the label (using image classification) and the bounding box (using regression) of small objects on every point. The second feature map has a size of 19x19, which can be used for slightly larger objects, as the points of the features cover bigger receptive fields. Finally, in the last layer, there is only one point in the feature map which is used for big objects.
 
 
 
