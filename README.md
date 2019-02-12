@@ -100,6 +100,7 @@ The Training module has the following 4 steps:
 2) Preprocessing step
 3) Create SSD model
 4) Training
+
 The input of traning should be in /checkpoints/[model_name]
 the output of traning will besave in checkpoints/ssd_[model_name]
 
