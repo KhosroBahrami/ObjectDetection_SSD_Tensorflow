@@ -117,10 +117,10 @@ The Training module has the following 4 steps:
 
 
 
-# Understanding SSD
+# How SSD works?
 SSD is designed for object detection in real-time which has one step. In contrast, Faster R-CNN uses a region proposal network and has two steps for object detection. SSD speeds up the process by eliminating the need of the region proposal network. To recover the drop in accuracy, SSD applies a few improvements including multi-scale features and default boxes. These improvements allow SSD to match the Faster R-CNN’s accuracy using lower resolution images, which further pushes the speed higher. According to the following comparison, it achieves the real-time processing speed and even beats the accuracy of the Faster R-CNN. (Accuracy is measured as the mean average precision mAP: the precision of the predictions.)
 
-
+### Backbone network 
 In SSD, the CNN backbone network (VGG, Mobilenet, ...) gradually shrinks the feature map size and increase the depth as it goes to the deeper layers. The deep layers cover larger receptive fields and construct more abstract representation, while the shallow layers cover smaller receptive fields. By using extracted features at different levels, we can use shallow layers to predict small objects and deeper layers to predict large objects.
 
 For example, for VGG backbone network, the first feature map is generated from layer 23 with a size of 38x38 of depth 512. Every point in the 38x38 feature map represents a part of the image, and the 512 channels are the features for every point. By using the features of 512 channels, we can predict the class label (using classification) and the bounding box (using regression) of the small objects on every point. The second feature map has a size of 19x19, which can be used for larger objects, as the points of the features cover larger receptive fields. Finally, in the last layer, there is only one point in the feature map which is used for big objects.
@@ -133,6 +133,30 @@ For example, for VGG backbone network, the first feature map is generated from l
 |       |      5      |
 |       |      3      |
 |       |      1      |
+
+### Priors (Anchor points) 
+
+
+### MultiBox Detection 
+
+
+
+### Loss function
+
+
+### Image Augmentation
+
+### Match Priors with Ground-Truth Boxes
+
+
+### Hard Negative Mining
+
+
+### Non Maxmimum Supression (NMS)
+
+
+
+
 
 
 # Using backbone networks in SSD: 
