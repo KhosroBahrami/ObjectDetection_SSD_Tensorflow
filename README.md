@@ -85,25 +85,28 @@ Test module uses the pretrained model that has been stored in /checkpoints/ssd_.
 
 
 ## Training SSD
-To train the SSD, use the following command:
-```python
-# Run training of SSD
-python3 ssd_train.py
-```
 We have 3 modes for training:
 - Traning an existing SSD boject detection for a spacific dataset or new sets of parameters. 
 - Training (first step fine-tuning) SSD based on an existing ImageNet classification model.
 - Training (second step fine-tuning) SSD based on an existing ImageNet classification model.
 The mode should be specified in configs/config_general.py.
+
+The input of training should be in /checkpoints/[model_name]
+
+the output of training will be store in checkpoints/ssd_[model_name]
+
+
+To train the SSD, use the following command:
+```python
+# Run training of SSD
+python3 ssd_train.py
+```
+
 The Training module has the following 4 steps:
 1) Data preparation
 2) Preprocessing step
 3) Create SSD model
 4) Training
-
-The input of training should be in /checkpoints/[model_name]
-
-the output of training will be store in checkpoints/ssd_[model_name]
 
 
 
