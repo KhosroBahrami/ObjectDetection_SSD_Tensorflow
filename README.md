@@ -142,6 +142,7 @@ For example, for VGG backbone network, the first feature map is generated from l
 
 
 ### Loss function
+The loss function is the combination of classification loss and regression loss. The regression loss used here is Smooth-L1 loss. 
 
 
 ### Image Augmentation
@@ -155,8 +156,8 @@ For example, for VGG backbone network, the first feature map is generated from l
 ### Non Maxmimum Supression (NMS)
 
 
-
-
+### Prediction
+For object detection, we feed an image into the SSD model, the priors of the features maps will generate a set of bounding boxes and labels for an object. To remove duplicate bounding boxes, non-maximum suppression is used to have final bounding box for one object.
 
 
 # Using backbone networks in SSD: 
