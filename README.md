@@ -128,17 +128,12 @@ For example, for VGG backbone network, the first feature map is generated from l
 | Layer | Feature Size |
 |-------|--------------|
 |       |      38      |
-|-------|--------------|
 |       |      19      |
-|-------|--------------|
 |       |      19      |
-|-------|--------------|
 |       |      5      |
-|-------|--------------|
 |       |      3      |
-|-------|--------------|
 |       |      1      |
-|-------|--------------|
+
 
 # Using backbone networks in SSD: 
 In this section, I explain the details of how I used different backbone networks for SSD object detection.   
