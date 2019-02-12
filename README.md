@@ -25,7 +25,23 @@ pip install opencv-python
 ```
 
 ## Datasets
-The Pascal VOC datasets (2007 and 2012). 
+For training & testing, I used Pascal VOC datasets (2007 and 2012). 
+To prapare tha datasets:
+1. Download VOC2007 and VOC2012 datasets. I assume the data is stored in /datasets/
+```python
+$ cd datasets
+$ wget http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
+$ wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar
+$ wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar
+```
+2. Convert the data to Tensorflow records:
+```
+$ tar -xvf VOCtrainval_11-May-2012.tar
+$ tar -xvf VOCtrainval_06-Nov-2007.tar
+$ tar -xvf VOCtest_06-Nov-2007.tar
+$ python3 ssd_image_to_tf.py
+```
+This stores the data into tfrecords_test and tfrecords_train folders.
 
 
 ## Demo of SSD
