@@ -2,7 +2,7 @@
 
 A TensorFlow implementation of the Single Shot Detector (SSD) for object detection. 
 
-It has been originally published in this research [paper](https://arxiv.org/abs/1512.02325). This repository contains a TensorFlow re-implementation of SSD which is inspired by the previous caffe and tensorflow implementations. However, this code has clear pipelines for train, test and demo; it is modular that can be extended or be use for new applications; and it also it supports 7 backbone networks. The backbone networks includes: VGG, ResnetV1, ResnetV2, MobilenetV1, MobilenetV2, InceptionV4, InceptionResnetV2.
+It has been originally published in this research [paper](https://arxiv.org/abs/1512.02325). This repository contains a TensorFlow re-implementation of SSD which is inspired by the previous caffe and tensorflow implementations. However, this code has clear pipelines for train, test and demo; it is modular that can be extended or be use for new applications; and it also it supports 7 backbone networks. The backbone networks, including VGG, ResnetV1, ResnetV2, MobilenetV1, MobilenetV2, InceptionV4, InceptionResnetV2.
 
 
 
