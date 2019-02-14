@@ -154,6 +154,13 @@ In practice, SSD uses a few different types of priorbox, each with a different s
 
 ### Scales and Aspect Ratios of Prior Boxes
 
+![Alt text](figs/scale_bb.png?raw=true "Title")
+
+![Alt text](figs/ns_bb.png?raw=true "Title")
+
+![Alt text](figs/s_bb.png?raw=true "Title")
+
+
 
 
 
