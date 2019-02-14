@@ -160,10 +160,11 @@ Suppose we have m feature maps for prediction, we can calculate Sk for the k-th 
 
 For each scale, sk, we have 5 non-square aspect ratios:
 
-<p align="center">
-  ![Alt text](figs/ns_bb.png?raw=true "5 Non-Square Bounding Boxes")
-</p>
-  
+![Alt text](figs/ns_bb.png?raw=true "5 Non-Square Bounding Boxes")
+
+<img align="left" width="100" height="100" src="figs/ns_bb.png">
+
+
 For aspect ratio of 1:1, we got sk’:
 
 ![Alt text](figs/s_bb.png?raw=true "1 Square Bounding Box")
