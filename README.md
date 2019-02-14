@@ -118,7 +118,14 @@ The Training module has the following 4 steps:
 
 
 # How SSD works?
-SSD is designed for object detection in real-time which has one step. In contrast, Faster R-CNN uses a region proposal network and has two steps for object detection. SSD speeds up the process by eliminating the need of the region proposal network. To recover the drop in accuracy, SSD applies a few improvements including multi-scale features and default boxes. These improvements allow SSD to match the Faster R-CNN’s accuracy using lower resolution images, which further pushes the speed higher. 
+SSD has been designed for object detection in real-time. In SSD, we only need to take one single shot to detect multiple objects within the image, while regional proposal network (RPN) based approaches such as Faster R-CNN needs two shots, one for generating region proposals, one for detecting the object of each proposal. Thus, SSD is much faster compared with two-shot RPN-based approaches. The following table compare SSD, Faster RCNN and YOLO.
+
+| method | mAP |  Speed(FPS) |
+| :---: |   :---:     | :---: |
+| SSD300 | 74.3% | 59 |
+| SSD300 | 76.9% | 22 |
+| Faster RCNN | 73.2% | 7 |
+| YOLOv1 | 63.4% | 45 |
 
 ### Backbone network & Feature maps
 The input of SSD is an image of fixed size, for example, 300x300 for SSD300. The image feeds into a CNN backbone network with several layers and generates multiple feature maps at different scales. 
