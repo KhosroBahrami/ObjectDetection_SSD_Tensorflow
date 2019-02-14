@@ -134,7 +134,7 @@ For example, for VGG backbone network, the first feature map is generated from l
 |       |      3      |
 |       |      1      |
 
-### Priors (Anchor points) 
+### Prior boxes (Anchor points) 
 
 
 ### MultiBox Detection 
@@ -147,9 +147,15 @@ The loss function is the combination of classification loss and regression loss.
 
 ### Image Augmentation
 
-### Match Priors with Ground-Truth Boxes
+### Match Prior boxes with Ground-Truth Boxes
 The criterion for matching a prior and a ground-truth box is IoU (Intersection Over Union), which is also called Jaccard index. The more overlap, the better match.
 Also, to have the same block size, the ground-truth boxes should be scaled to the same scale.
+The procedure for matching prior boxes with ground-truth boxes is as follows:
+- We put one priorbox at each location in the prediction map.
+- We compute the intersect over union (IoU) between the priorbox and the ground truth.
+- The ground truth object that has the highest IoU is used as the target for each prediction, given its IoU is higher than a threshold.
+- For predictions who have no valid match, the target class is set to the background class and they will not be used for calculating the localization loss.
+
 
 
 ### Hard Negative Mining
