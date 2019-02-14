@@ -155,12 +155,15 @@ In practice, SSD uses a few different types of priorbox, each with a different s
 ### Scales and Aspect Ratios of Prior Boxes
 
 ![Alt text](figs/scale_bb.png?raw=true "Scale of Default Boxes")
+
 Suppose we have m feature maps for prediction, we can calculate Sk for the k-th feature map. Smin is 0.2, Smax is 0.9. That means the scale at the lowest layer is 0.2 and the scale at the highest layer is 0.9. All layers in between is regularly spaced.
 
 For each scale, sk, we have 5 non-square aspect ratios:
 
-![Alt text](figs/ns_bb.png?raw=true "5 Non-Square Bounding Boxes")
-
+<p align="center">
+  ![Alt text](figs/ns_bb.png?raw=true "5 Non-Square Bounding Boxes")
+</p>
+  
 For aspect ratio of 1:1, we got sk’:
 
 ![Alt text](figs/s_bb.png?raw=true "1 Square Bounding Box")
