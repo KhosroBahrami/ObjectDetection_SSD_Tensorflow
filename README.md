@@ -162,8 +162,6 @@ For each scale, sk, we have 5 non-square aspect ratios:
 
 ![Alt text](figs/ns_bb.png?raw=true "5 Non-Square Bounding Boxes")
 
-<img align="left" width="100" height="100" src="figs/ns_bb.png">
-
 
 For aspect ratio of 1:1, we got sk’:
 
