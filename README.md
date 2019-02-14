@@ -155,7 +155,8 @@ The procedure for matching prior boxes with ground-truth boxes is as follows:
 - We compute the intersect over union (IoU) between the priorbox and the ground truth.
 - The ground truth object that has the highest IoU is used as the target for each prediction, given its IoU is higher than a threshold.
 - For predictions who have no valid match, the target class is set to the background class and they will not be used for calculating the localization loss.
-
+- If there is significant overlapping between a priorbox and a ground truth object, then the ground truth can be used at that location. The class of the ground truth is directly used to compute the classification loss; whereas the offset between the ground truth bounding box and the priorbox is used to compute the location loss.
+- Also, usually, different sizes for predictions at different scales are used. For example, SSD300 uses 21, 45, 99, 153, 207, 261 as the sizes of the priorbox at its 6 different prediction layers.
 
 
 ### Hard Negative Mining
