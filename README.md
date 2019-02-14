@@ -143,7 +143,7 @@ The procedure for matching prior boxes with ground-truth boxes is as follows:
 
 Also, usually, different sizes for predictions at different scales are used. For example, SSD300 uses 21, 45, 99, 153, 207, 261 as the sizes of the priorbox at its 6 different prediction layers.
 
-In practice, SSD uses a few different types of priorbox, each with a different scale or aspect ratio, in a single layer. Doing so creates different "experts" for detecting objects of different shapes. For example, SSD300 use 4, 6, 6, 6, 6, 4, 4 types of different priorboxes for its seven prediction layers, whereas the aspect ratio of these priorboxes can be chosen from 1:3, 1:2, 1:1, 2:1 or 3:1. Notice, experts in the same layer take the same underlying input (the same receptive field). They behave differently because they use different parameters (convolutional filters) and use different ground truth fetch by different priorboxes.
+In practice, SSD uses a few different types of priorbox, each with a different scale or aspect ratio, in a single layer. Doing so creates different "experts" for detecting objects of different shapes. For example, SSD300 use ... types of different priorboxes for its seven prediction layers, whereas the aspect ratio of these priorboxes can be chosen from 1:3, 1:2, 1:1, 2:1 or 3:1. Notice, experts in the same layer take the same underlying input (the same receptive field). They behave differently because they use different parameters (convolutional filters) and use different ground truth fetch by different priorboxes.
 
 
 ### MultiBox Detection 
@@ -181,7 +181,7 @@ In this section, I explain the details of how I used different backbone networks
 | :---: |   :---:     |
 |       |      38      |
 |       |      19      |
-|       |      19      |
+|       |      10      |
 |       |      5      |
 |       |      3      |
 |       |      1      |
