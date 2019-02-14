@@ -203,10 +203,15 @@ SSD use a number of augmentation strategies.
 
 ### Loss function
 The loss function is the combination of confidence loss (classification loss) and localization loss (regression loss). 
+MultiBox’s loss function also combined two critical components that made their way into SSD:
 
-Localization loss: is the smooth L1 loss between the predicted box (l) and the ground-truth box (g) parameters. These parameters include the offsets for the center point (cx, cy), width (w) and height (h) of the bounding box. This loss is similar to the one in Faster R-CNN.
+Location loss: This measures how far away the network’s predicted bounding boxes are from the ground truth ones from the training set. It is the smooth L1 (L2) loss between the predicted box (l) and the ground-truth box (g) parameters. These parameters include the offsets for the center point (cx, cy), width (w) and height (h) of the bounding box. This loss is similar to the one in Faster R-CNN.
 
 Confidence loss: is the confidence loss which is the softmax loss over multiple classes confidences.
+this measures how confident the network is of the objectness of the computed bounding box. Categorical cross-entropy is used to compute this loss.
+
+multibox_loss = confidence_loss + alpha * location_loss
+
 
 ### Non Maxmimum Supression (NMS)
 
