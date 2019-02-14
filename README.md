@@ -118,51 +118,50 @@ The Training module has the following 4 steps:
 
 
 # How SSD works?
-SSD is designed for object detection in real-time which has one step. In contrast, Faster R-CNN uses a region proposal network and has two steps for object detection. SSD speeds up the process by eliminating the need of the region proposal network. To recover the drop in accuracy, SSD applies a few improvements including multi-scale features and default boxes. These improvements allow SSD to match the Faster R-CNN’s accuracy using lower resolution images, which further pushes the speed higher. According to the following comparison, it achieves the real-time processing speed and even beats the accuracy of the Faster R-CNN. (Accuracy is measured as the mean average precision mAP: the precision of the predictions.)
+SSD is designed for object detection in real-time which has one step. In contrast, Faster R-CNN uses a region proposal network and has two steps for object detection. SSD speeds up the process by eliminating the need of the region proposal network. To recover the drop in accuracy, SSD applies a few improvements including multi-scale features and default boxes. These improvements allow SSD to match the Faster R-CNN’s accuracy using lower resolution images, which further pushes the speed higher. 
 
-### Backbone network 
-In SSD, the CNN backbone network (VGG, Mobilenet, ...) gradually shrinks the feature map size and increase the depth as it goes to the deeper layers. The deep layers cover larger receptive fields and construct more abstract representation, while the shallow layers cover smaller receptive fields. By using extracted features at different levels, we can use shallow layers to predict small objects and deeper layers to predict large objects.
+### Backbone network & Feature maps
+The input of SSD is an image of fixed size, for example, 300x300 for SSD300. The image feeds into a CNN backbone network with several layers and generates multiple feature maps at different scales. 
+
+The CNN backbone network (VGG, Mobilenet, ...) gradually reduces the feature map size and increase the depth as it goes to the deeper layers. The deep layers cover larger receptive fields and construct more abstract representation, while the shallow layers cover smaller receptive fields. By using extracted features at different levels, we can use shallow layers to predict small objects and deeper layers to predict large objects.
+
+The output of SSD is a prediction map. Each location in this map stores classes confidence and bounding box information as if there is indeed an object of interests at every location. Obviously, there will be a lot of false alarms, so a further process is used to select a list of predictions.
 
 For example, for VGG backbone network, the first feature map is generated from layer 23 with a size of 38x38 of depth 512. Every point in the 38x38 feature map represents a part of the image, and the 512 channels are the features for every point. By using the features of 512 channels, we can predict the class label (using classification) and the bounding box (using regression) of the small objects on every point. The second feature map has a size of 19x19, which can be used for larger objects, as the points of the features cover larger receptive fields. Finally, in the last layer, there is only one point in the feature map which is used for big objects.
 
-| Layer | Feature Size |
-| :---: |   :---:     |
-|       |      38      |
-|       |      19      |
-|       |      19      |
-|       |      5      |
-|       |      3      |
-|       |      1      |
+To train the network, one needs to compare the ground truth (a list of objects) against the prediction map. This is achieved with the help of prior boxes.
 
 ### Prior boxes (Anchor points) 
+Intuitively, object detection is a local task: what is in the top left corner of an image is usually unrelated to predict an object in the bottom right corner of the image. So one needs to measure how relevance each ground truth is to each prediction. The criterion for matching a prior and a ground-truth box is IoU (Intersection Over Union), which is also called Jaccard index. The more overlap, the better match. Also, to have the same block size, the ground-truth boxes should be scaled to the same scale.
 
-
-### MultiBox Detection 
-
-
-
-### Loss function
-The loss function is the combination of classification loss and regression loss. The regression loss used here is Smooth-L1 loss. 
-
-
-### Image Augmentation
-
-### Match Prior boxes with Ground-Truth Boxes
-The criterion for matching a prior and a ground-truth box is IoU (Intersection Over Union), which is also called Jaccard index. The more overlap, the better match.
-Also, to have the same block size, the ground-truth boxes should be scaled to the same scale.
 The procedure for matching prior boxes with ground-truth boxes is as follows:
 - We put one priorbox at each location in the prediction map.
 - We compute the intersect over union (IoU) between the priorbox and the ground truth.
 - The ground truth object that has the highest IoU is used as the target for each prediction, given its IoU is higher than a threshold.
 - For predictions who have no valid match, the target class is set to the background class and they will not be used for calculating the localization loss.
 - If there is significant overlapping between a priorbox and a ground truth object, then the ground truth can be used at that location. The class of the ground truth is directly used to compute the classification loss; whereas the offset between the ground truth bounding box and the priorbox is used to compute the location loss.
-- Also, usually, different sizes for predictions at different scales are used. For example, SSD300 uses 21, 45, 99, 153, 207, 261 as the sizes of the priorbox at its 6 different prediction layers.
+
+Also, usually, different sizes for predictions at different scales are used. For example, SSD300 uses 21, 45, 99, 153, 207, 261 as the sizes of the priorbox at its 6 different prediction layers.
+
+In practice, SSD uses a few different types of priorbox, each with a different scale or aspect ratio, in a single layer. Doing so creates different "experts" for detecting objects of different shapes. For example, SSD300 use 4, 6, 6, 6, 6, 4, 4 types of different priorboxes for its seven prediction layers, whereas the aspect ratio of these priorboxes can be chosen from 1:3, 1:2, 1:1, 2:1 or 3:1. Notice, experts in the same layer take the same underlying input (the same receptive field). They behave differently because they use different parameters (convolutional filters) and use different ground truth fetch by different priorboxes.
+
+
+### MultiBox Detection 
+
+Multi-scale Detection: The resolution of the detection equals the size of its prediction map. Multi-scale detection is achieved by generating prediction maps of different resolutions. For example, SSD512 outputs seven prediction maps of resolutions 64x64, 32x32, 16x16, 8x8, 4x4, 2x2, and 1x1 respectively. You can think there are 5461 "local prediction" behind the scene. The input of each prediction is effectively the receptive field of the output feature.
 
 
 ### Hard Negative Mining
-In the matching phase, we match ground-truth bounding boxes (with objects) to multiple priors. However there are a lot more unmatched priors (priors without any object). In other words, the huge number of priors labelled as background make the dataset very unbalanced. To make the dataset more balanced, Hard Negative Mining is often used. The idea is only count the background priors with highest confidence into the computation of total loss function. The others are ignored. The ratio between background priors and matched priors becomes much lower (The ratio is 3).
+Priorbox uses a distance-based metric (IoU) to create ground truth predictions, including backgrounds (no matched objects) and objects. However, there can be an imbalance between foreground samples and background samples. There are a lot more unmatched priors (priors without any object). In consequence, the detector may produce many false negatives due to the lack of a training signal of foreground objects. In other words, the huge number of priors labelled as background make the dataset very unbalanced.
+
+To address this problem, SSD uses hard negative mining: all background samples are sorted by their predicted background scores in the ascending order. Only the top K samples are kept for proceeding to the computation of the loss. K is computed on the fly for each batch to keep a 1:3 ratio between foreground samples and background samples.
+
+### Image Augmentation
+SSD use a number of augmentation strategies. 
 
 
+### Loss function
+The loss function is the combination of classification loss and regression loss. The regression loss used here is Smooth-L1 loss. 
 
 ### Non Maxmimum Supression (NMS)
 
@@ -176,6 +175,16 @@ In this section, I explain the details of how I used different backbone networks
 
 
 ### VGG
+
+
+| Layer | Feature Size |
+| :---: |   :---:     |
+|       |      38      |
+|       |      19      |
+|       |      19      |
+|       |      5      |
+|       |      3      |
+|       |      1      |
 
 
 ### ResnetV1
