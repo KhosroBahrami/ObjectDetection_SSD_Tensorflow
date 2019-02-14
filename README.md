@@ -120,11 +120,11 @@ The Training module has the following 4 steps:
 # How SSD works?
 SSD has been designed for object detection in real-time. In SSD, we only need to take one single shot to detect multiple objects within the image, while regional proposal network (RPN) based approaches such as Faster R-CNN needs two shots, one for generating region proposals, one for detecting the object of each proposal. Thus, SSD is much faster compared with two-shot RPN-based approaches. The following table compare SSD, Faster RCNN and YOLO.
 
-| method | mAP |  Speed(FPS) |
+| Object Detection Method | mAP |  Speed (FPS) |
 | :---: |   :---:     | :---: |
 | SSD300 | 74.3% | 59 |
 | SSD300 | 76.9% | 22 |
-| Faster RCNN | 73.2% | 7 |
+| Faster R-CNN | 73.2% | 7 |
 | YOLOv1 | 63.4% | 45 |
 
 ### Backbone network & Feature maps
@@ -151,6 +151,20 @@ The procedure for matching prior boxes with ground-truth boxes is as follows:
 Also, usually, different sizes for predictions at different scales are used. For example, SSD300 uses 21, 45, 99, 153, 207, 261 as the sizes of the priorbox at its 6 different prediction layers.
 
 In practice, SSD uses a few different types of priorbox, each with a different scale or aspect ratio, in a single layer. Doing so creates different "experts" for detecting objects of different shapes. For example, SSD300 use ... types of different priorboxes for its seven prediction layers, whereas the aspect ratio of these priorboxes can be chosen from 1:3, 1:2, 1:1, 2:1 or 3:1. Notice, experts in the same layer take the same underlying input (the same receptive field). They behave differently because they use different parameters (convolutional filters) and use different ground truth fetch by different priorboxes.
+
+The number prior boxes is clculated as follow:
+
+Say for example, at Conv4_3, it is of size 38×38×512. 3×3 conv is applied. And there are 4 bounding boxes and each bounding box will have (classes + 4) outputs. Thus, at Conv4_3, the output is 38×38×4×(c+4). Suppose there are 20 object classes plus one background class, the output is 38×38×4×(21+4) = 144,400. In terms of number of bounding boxes, there are 38×38×4 = 5776 bounding boxes.
+Similarly for other conv layers:
+- Conv7: 19×19×6 = 2166 boxes (6 boxes for each location)
+- Conv8_2: 10×10×6 = 600 boxes (6 boxes for each location)
+- Conv9_2: 5×5×6 = 150 boxes (6 boxes for each location)
+- Conv10_2: 3×3×4 = 36 boxes (4 boxes for each location)
+- Conv11_2: 1×1×4 = 4 boxes (4 boxes for each location)
+If we sum them up, we got 5776 + 2166 + 600 + 150 + 36 +4 = 8732 boxes in total for SSD. 
+In YOLO, there are 7×7 locations at the end with 2 bounding boxes for each location. YOLO only got 7×7×2 = 98 boxes. Hence, SSD has 8732 bounding boxes which is more than that of YOLO.
+
+
 
 
 ### MultiBox Detection 
