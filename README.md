@@ -197,6 +197,12 @@ Priorbox uses a distance-based metric (IoU) to create ground truth predictions, 
 
 To address this problem, SSD uses hard negative mining: all background samples are sorted by their predicted background scores in the ascending order. Only the top K samples are kept for proceeding to the computation of the loss. K is computed on the fly for each batch to keep a 1:3 ratio between foreground samples and background samples.
 
+
+![Alt text](figs/hnm.png?raw=true "Example of hard negative mining (from Jamie Kang blog)")
+
+
+
+
 ### Image Augmentation
 SSD use a number of augmentation strategies. 
 
