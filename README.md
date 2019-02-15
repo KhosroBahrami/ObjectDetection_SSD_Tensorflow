@@ -120,15 +120,19 @@ The Training module has the following 4 steps:
 # How SSD works?
 SSD has been designed for object detection in real-time. In SSD, we only need to take one single shot to detect multiple objects within the image, while regional proposal network (RPN) based approaches such as Faster R-CNN needs two shots, one for generating region proposals, one for detecting the object of each proposal. Thus, SSD is much faster compared with two-shot RPN-based approaches. The following table compare SSD, Faster RCNN and YOLO.
 
-| Object Detection Method | mAP |  Speed (FPS) |
-| :---: |   :---:     | :---: |
-| SSD300 | 74.3% | 59 |
-| SSD300 | 76.9% | 22 |
-| Faster R-CNN | 73.2% | 7 |
-| YOLOv1 | 63.4% | 45 |
+| Object Detection Method | VOC2007 test mAP |  Speed (FPS) | Number of Prior Boxes | Input Resolution |
+| :---: |   :---:     | :---: | :---: | :---: |
+| Faster R-CNN (VGG16) | 73.2% | 7 | 6000 | 1000*600
+| YOLOv1 | 63.4% | 45 |  98 | 448*448 |
+| SSD300 (VGG16) | 74.3% | 59 | 8732 | 300*300 |
+| SSD300 (VGG16) | 76.9% | 22 | 24564 | 512*512 |
 
 ### Backbone network & Feature maps
 The input of SSD is an image of fixed size, for example, 300x300 for SSD300. The image feeds into a CNN backbone network with several layers and generates multiple feature maps at different scales. 
+
+Features maps (i.e. the results of the convolutional blocks) are a representation of the dominant features of the image at different scales, therefore running MultiBox on multiple feature maps increases the likelihood of any object (large and small) to be eventually detected, localized and appropriately classified. The image below shows how the network “sees” a given image across its feature maps:
+
+![Alt text](figs/vgg_feature.png?raw=true "VGG Feature Map Visualisation (from Brown Uni)")
 
 The CNN backbone network (VGG, Mobilenet, ...) gradually reduces the feature map size and increase the depth as it goes to the deeper layers. The deep layers cover larger receptive fields and construct more abstract representation, while the shallow layers cover smaller receptive fields. By using extracted features at different levels, we can use shallow layers to predict small objects and deeper layers to predict large objects.
 
@@ -204,7 +208,7 @@ To address this problem, SSD uses hard negative mining: all background samples a
 
 
 ### Image Augmentation
-SSD use a number of augmentation strategies. 
+The authors of SSD stated that data augmentation, like in many other deep learning applications, has been crucial to teach the network to become more robust to various object sizes in the input. To this end, they generated additional training examples with patches of the original image at different IoU ratios (e.g. 0.1, 0.3, 0.5, etc.) and random patches as well. Moreover, each image is also randomly horizontally flipped with a probability of 0.5, thereby making sure potential objects appear on left and right with similar likelihood.
 
 
 ### Loss function
@@ -220,6 +224,7 @@ multibox_loss = confidence_loss + alpha * location_loss
 
 
 ### Non Maxmimum Supression (NMS)
+Given the large number of boxes generated during a forward pass of SSD at inference time , it is essential to prune most of the bounding box by applying a technique known as non-maximum suppression: boxes with a confidence loss threshold less than ct (e.g. 0.01) and IoU less than lt (e.g. 0.45) are discarded, and only the top N predictions are kept. This ensures only the most likely predictions are retained by the network, while the more noisier ones are removed.
 
 
 ### Prediction
