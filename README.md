@@ -239,6 +239,8 @@ In this section, I explain the details of how I used different backbone networks
 
 ### VGG
 
+SSD300 adds 4 more auxiliary convolution layers after the VGG16. For object detection, 4 feature maps from these layers and 2 features maps from original layers of VGG16 (totally 6 feature maps) are used. In total, SSD makes 8732 predictions using 6 layers.
+
 
 | Layer | Feature Size |
 | :---: |   :---:     |
