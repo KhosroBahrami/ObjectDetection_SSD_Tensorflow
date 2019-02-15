@@ -122,7 +122,7 @@ SSD has been designed for object detection in real-time. In SSD, we only need to
 
 | Object Detection Method | VOC2007 test mAP |  Speed (FPS) | Number of Prior Boxes | Input Resolution |
 | :---: |   :---:     | :---: | :---: | :---: |
-| Faster R-CNN (VGG16) | 73.2% | 7 | 6000 | 1000*600
+| Faster R-CNN (VGG16) | 73.2% | 7 | 6000 | 1000*600 |
 | YOLOv1 (VGG16) | 63.4% | 45 |  98 | 448*448 |
 | SSD300 (VGG16) | 74.3% | 59 | 8732 | 300*300 |
 | SSD512 (VGG16) | 76.9% | 22 | 24564 | 512*512 |
@@ -158,6 +158,8 @@ In practice, SSD uses a few different types of priorbox, each with a different s
 
 ### Scales and Aspect Ratios of Prior Boxes
 
+Default boundary boxes are chosen manually. SSD defines a scale value for each feature map layer. Starting from first feature map, Conv4_3 detects objects at the smallest scale 0.2 (or 0.1 sometimes) and then increases linearly to the last layer (Conv11_2) at a scale of 0.9. Combining the scale value with the target aspect ratios, we compute the width and the height of the default boxes. For layers making 6 predictions, SSD starts with 5 target aspect ratios: 1, 2, 3, 1/2 and 1/3. Then the width and the height of the default boxes are calculated as:
+
 ![Alt text](figs/scale_bb.png?raw=true "Scale of Default Boxes")
 
 Suppose we have m feature maps for prediction, we can calculate Sk for the k-th feature map. Smin is 0.2, Smax is 0.9. That means the scale at the lowest layer is 0.2 and the scale at the highest layer is 0.9. All layers in between is regularly spaced.
@@ -172,6 +174,7 @@ For aspect ratio of 1:1, we got sk’:
 ![Alt text](figs/s_bb.png?raw=true "1 Square Bounding Box")
 
 Therefore, we can have at most 6 bounding boxes in total with different aspect ratios. For layers with only 4 bounding boxes, ar = 1/3 and 3 are omitted.
+
 
 
 ### Number of Prior Boxses: 
