@@ -168,8 +168,9 @@ For each scale, sk, we have 5 non-square aspect ratios:
 Then, SSD adds an extra prior box for aspect ratio of 1:1, as:
 ![Alt text](figs/s_bb.png?raw=true "1 Square Bounding Box")
 
-Therefore, we can have at most 6 bounding boxes in total with different aspect ratios. For layers with only 4 bounding boxes, ar = 1/3 and 3 are omitted.
+Therefore, we can have at most 6 bounding boxes in total with different aspect ratios. For layers with only 4 bounding boxes, 1/3 and 3 are omitted.
 
+Note: YOLO uses k-means clustering on the training dataset to determine those default boundary boxes.
 
 
 ### Number of Prior Boxses: 
