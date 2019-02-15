@@ -202,6 +202,8 @@ Priorbox uses a distance-based metric (IoU) to create ground truth predictions, 
 
 To address this problem, SSD uses hard negative mining: all background samples are sorted by their predicted background scores in the ascending order. Only the top K samples are kept for proceeding to the computation of the loss. K is computed on the fly for each batch to keep a 1:3 ratio between foreground samples and background samples.
 
+However, we make far more predictions than the number of objects presence. So there are much more negative matches than positive matches. This creates a class imbalance which hurts training. We are training the model to learn background space rather than detecting objects. However, SSD still requires negative sampling so it can learn what constitutes a bad prediction. So, instead of using all the negatives, we sort those negatives by their calculated confidence loss. SSD picks the negatives with the top loss and makes sure the ratio between the picked negatives and positives is at most 3:1. This leads to a faster and more stable training.
+
 ![Alt text](figs/hnm.png?raw=true "Example of hard negative mining (from Jamie Kang blog)")
 
 
@@ -213,6 +215,13 @@ SSD predictions are classified as positive matches or negative matches. SSD only
 
 ### Image Augmentation
 The authors of SSD stated that data augmentation, like in many other deep learning applications, has been crucial to teach the network to become more robust to various object sizes in the input. To this end, they generated additional training examples with patches of the original image at different IoU ratios (e.g. 0.1, 0.3, 0.5, etc.) and random patches as well. Moreover, each image is also randomly horizontally flipped with a probability of 0.5, thereby making sure potential objects appear on left and right with similar likelihood.
+
+Data augmentation is important in improving accuracy. Augment data with flipping, cropping and color distortion. To handle variants in various object sizes and shapes, each training image is randomly sampled by one of the following options:
+
+- Use the original,
+- Sample a patch with IoU of 0.1, 0.3, 0.5, 0.7 or 0.9,
+- Randomly sample a patch. The sampled patch will have an aspect ratio between 1/2 and 2. Then it is resized to a fixed size and we flip one-half of the training data. 
+- Color distortions.
 
 
 ### Loss function
@@ -226,13 +235,14 @@ Confidence loss: is the confidence loss which is the softmax loss over multiple 
 this measures how confident the network is of the objectness of the computed bounding box. Categorical cross-entropy is used to compute this loss.
 The confidence loss is the loss in making a class prediction. For every positive match prediction, we penalize the loss according to the confidence score of the corresponding class. For negative match predictions, we penalize the loss according to the confidence score of the class “0”: class “0” classifies no object is detected.
 
-multibox_loss = (1/N)*confidence_loss + α * location_loss
+multibox_loss = 1/N *(confidence_loss + α * location_loss)
 
 where N is the number of positive match and α is the weight for the localization loss.
 
 
 ### Non Maxmimum Supression (NMS)
 Given the large number of boxes generated during a forward pass of SSD at inference time , it is essential to prune most of the bounding box by applying a technique known as non-maximum suppression: boxes with a confidence loss threshold less than ct (e.g. 0.01) and IoU less than lt (e.g. 0.45) are discarded, and only the top N predictions are kept. This ensures only the most likely predictions are retained by the network, while the more noisier ones are removed.
+
 
 
 ### Prediction
