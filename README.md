@@ -157,20 +157,15 @@ Also, usually, different sizes for predictions at different scales are used. For
 In practice, SSD uses a few different types of priorbox, each with a different scale or aspect ratio, in a single layer. Doing so creates different "experts" for detecting objects of different shapes. For example, SSD300 use ... types of different priorboxes for its seven prediction layers, whereas the aspect ratio of these priorboxes can be chosen from 1:3, 1:2, 1:1, 2:1 or 3:1. Notice, experts in the same layer take the same underlying input (the same receptive field). They behave differently because they use different parameters (convolutional filters) and use different ground truth fetch by different priorboxes.
 
 ### Scales and Aspect Ratios of Prior Boxes
-
-Default boundary boxes are chosen manually. SSD defines a scale value for each feature map layer. Starting from first feature map, Conv4_3 detects objects at the smallest scale 0.2 (or 0.1 sometimes) and then increases linearly to the last layer (Conv11_2) at a scale of 0.9. Combining the scale value with the target aspect ratios, we compute the width and the height of the default boxes. For layers making 6 predictions, SSD starts with 5 target aspect ratios: 1, 2, 3, 1/2 and 1/3. Then the width and the height of the default boxes are calculated as:
-
+Size of default prior boxes are chosen manually. SSD defines a scale value for each feature map layer. Starting from first feature map, Conv4_3 detects objects at the smallest scale 0.2 (or 0.1 sometimes) and then increases linearly to the last layer (Conv11_2) at a scale of 0.9. Combining the scale value with the target aspect ratios, we compute the width and the height of the default boxes. For layers making 6 predictions, SSD starts with 5 target aspect ratios: 1, 2, 3, 1/2 and 1/3. 
+Suppose we have m feature maps for prediction, we can calculate Sk for the k-th feature map. Smin is 0.2, Smax is 0.9. That means the scale at the lowest layer is 0.2 and the scale at the highest layer is 0.9. All layers in between is regularly spaced. Then the width and the height of the default boxes are calculated as:
 ![Alt text](figs/scale_bb.png?raw=true "Scale of Default Boxes")
-
-Suppose we have m feature maps for prediction, we can calculate Sk for the k-th feature map. Smin is 0.2, Smax is 0.9. That means the scale at the lowest layer is 0.2 and the scale at the highest layer is 0.9. All layers in between is regularly spaced.
 
 For each scale, sk, we have 5 non-square aspect ratios:
 
 ![Alt text](figs/ns_bb.png?raw=true "5 Non-Square Bounding Boxes")
 
-
-For aspect ratio of 1:1, we got sk’:
-
+Then, SSD adds an extra prior box for aspect ratio of 1:1, as:
 ![Alt text](figs/s_bb.png?raw=true "1 Square Bounding Box")
 
 Therefore, we can have at most 6 bounding boxes in total with different aspect ratios. For layers with only 4 bounding boxes, ar = 1/3 and 3 are omitted.
