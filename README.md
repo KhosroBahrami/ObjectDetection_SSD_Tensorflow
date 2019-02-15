@@ -202,9 +202,12 @@ Priorbox uses a distance-based metric (IoU) to create ground truth predictions, 
 
 To address this problem, SSD uses hard negative mining: all background samples are sorted by their predicted background scores in the ascending order. Only the top K samples are kept for proceeding to the computation of the loss. K is computed on the fly for each batch to keep a 1:3 ratio between foreground samples and background samples.
 
-
 ![Alt text](figs/hnm.png?raw=true "Example of hard negative mining (from Jamie Kang blog)")
 
+
+
+### Matching Prior and Ground-truth bounding boxes
+SSD predictions are classified as positive matches or negative matches. SSD only uses positive matches in calculating the localization cost (the mismatch of the boundary box). If the corresponding default boundary box (not the predicted boundary box) has an IoU greater than 0.5 with the ground truth, the match is positive. Otherwise, it is negative. 
 
 
 
@@ -217,11 +220,15 @@ The loss function is the combination of confidence loss (classification loss) an
 MultiBox’s loss function also combined two critical components that made their way into SSD:
 
 Location loss: This measures how far away the network’s predicted bounding boxes are from the ground truth ones from the training set. It is the smooth L1 (L2) loss between the predicted box (l) and the ground-truth box (g) parameters. These parameters include the offsets for the center point (cx, cy), width (w) and height (h) of the bounding box. This loss is similar to the one in Faster R-CNN.
+The localization loss is the mismatch between the ground truth box and the predicted boundary box. SSD only penalizes predictions from positive matches. We want the predictions from the positive matches to get closer to the ground truth. Negative matches can be ignored.
 
 Confidence loss: is the confidence loss which is the softmax loss over multiple classes confidences.
 this measures how confident the network is of the objectness of the computed bounding box. Categorical cross-entropy is used to compute this loss.
+The confidence loss is the loss in making a class prediction. For every positive match prediction, we penalize the loss according to the confidence score of the corresponding class. For negative match predictions, we penalize the loss according to the confidence score of the class “0”: class “0” classifies no object is detected.
 
-multibox_loss = confidence_loss + alpha * location_loss
+multibox_loss = (1/N)*confidence_loss + α * location_loss
+
+where N is the number of positive match and α is the weight for the localization loss.
 
 
 ### Non Maxmimum Supression (NMS)
