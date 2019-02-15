@@ -123,9 +123,9 @@ SSD has been designed for object detection in real-time. In SSD, we only need to
 | Object Detection Method | VOC2007 test mAP |  Speed (FPS) | Number of Prior Boxes | Input Resolution |
 | :---: |   :---:     | :---: | :---: | :---: |
 | Faster R-CNN (VGG16) | 73.2% | 7 | 6000 | 1000*600
-| YOLOv1 | 63.4% | 45 |  98 | 448*448 |
+| YOLOv1 (VGG16) | 63.4% | 45 |  98 | 448*448 |
 | SSD300 (VGG16) | 74.3% | 59 | 8732 | 300*300 |
-| SSD300 (VGG16) | 76.9% | 22 | 24564 | 512*512 |
+| SSD512 (VGG16) | 76.9% | 22 | 24564 | 512*512 |
 
 ### Backbone network & Feature maps
 The input of SSD is an image of fixed size, for example, 300x300 for SSD300. The image feeds into a CNN backbone network with several layers and generates multiple feature maps at different scales. 
@@ -175,10 +175,12 @@ Therefore, we can have at most 6 bounding boxes in total with different aspect r
 
 
 ### Number of Prior Boxses: 
-The number of prior boxes is calculated as follow: 
-For example for VGG as backbone, 6 feature maps from layers Conv4_3, Conv7, Conv8_2, Conv9_2, Conv10_2 and Conv11_2 are used. 
-At Conv4_3, feature map is of size 38×38×512. 3×3 conv is applied. And there are 4 bounding boxes and each bounding box will have (classes + 4) outputs. Thus, at Conv4_3, the output is 38×38×4×(c+4). Suppose there are 20 object classes plus one background class, the output is 38×38×4×(21+4) = 144,400. In terms of number of bounding boxes, there are 38×38×4 = 5776 bounding boxes.
-Similarly for other conv layers:
+The number of prior boxes is calculated as follow. For VGG16 as backbone, 6 feature maps from layers Conv4_3, Conv7, Conv8_2, Conv9_2, Conv10_2 and Conv11_2 are used. 
+At Conv4_3, feature map is of size 38×38×512. There are 4 bounding boxes and each bounding box will have (classes + 4) outputs. Thus, at Conv4_3, the output is 38×38×4×(c+4). Suppose there are 20 object classes plus one background class, the output is 38×38×4×(21+4) = 144,400. Each prediction composes of a boundary box and 21 scores for each class (one extra class for no object), and we pick the highest score as the class for the bounded object. Conv4_3 makes a total of 38 × 38 × 4 predictions: four predictions per cell regardless of the depth of the feature maps. As expected, many predictions contain no object. SSD reserves a class “0” to indicate it has no objects. Each prediction includes a boundary box and 21 scores for 21 classes (one class for no object). Making multiple predictions containing boundary boxes and confidence scores is called multibox.
+
+In terms of number of bounding boxes, there are 38×38×4 = 5776 bounding boxes.
+Therefore:
+- Conv4_3: 38×38×4 = 5776 boxes (4 boxes for each location)
 - Conv7: 19×19×6 = 2166 boxes (6 boxes for each location)
 - Conv8_2: 10×10×6 = 600 boxes (6 boxes for each location)
 - Conv9_2: 5×5×6 = 150 boxes (6 boxes for each location)
