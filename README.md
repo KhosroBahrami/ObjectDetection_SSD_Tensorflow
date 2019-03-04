@@ -253,38 +253,101 @@ For object detection, we feed an image into the SSD model, the priors of the fea
 In this section, I explain the details of how I used different backbone networks for SSD object detection.   
 
 
-### VGG
+### VGG16
 
-SSD300 adds 4 more auxiliary convolution layers after the VGG16. For object detection, 4 feature maps from these layers and 2 features maps from original layers of VGG16 (totally 6 feature maps) are used. In total, SSD makes 8732 predictions using 6 layers.
+To use VGG as backbone, I add 4 auxulary convolution layers after the VGG16. For object detection, 2 features maps from original layers of VGG16 and 4 feature maps from added auxulary layers (totally 6 feature maps) are used. 
 
-
-| Layer | Feature Size |
-| :---: |   :---:     |
-|       |      38      |
-|       |      19      |
-|       |      10      |
-|       |      5      |
-|       |      3      |
-|       |      1      |
+| Layer | Feature Map Size | 
+| :---: |   :---:      | 
+|   layer 4   |    38*38     |
+|   layer 7   |    19*19     | 
+|   layer 8   |    10*10     | 
+|   layer 9   |     5*5      |  
+|   layer 10  |      3*3     |
+|   layer 11  |      1*1     |
 
 
 ### ResnetV1
 
+To use ResnetV1 as backbone, I add 3 auxulary convolution layers after the ResnetV1. For object detection, 3 features maps from original layers of ResnetV1 and 3 feature maps from added auxulary layers (totally 6 feature maps) are used. 
+
+| Layer | Feature Map Size | 
+| :---: |   :---:      | 
+|   resnet_v1/block2   |    19*19     |
+|   resnet_v1/block3   |    10*10     | 
+|   resnet_v1/block4   |    10*10     | 
+|   layer 13   |     5*5      |  
+|   layer 14  |      3*3     |
+|   layer 15  |      1*1     |
+
 
 ### ResnetV2
+
+To use ResnetV2 as backbone, I add 3 auxulary convolution layers after the ResnetV2. For object detection, 3 features maps from original layers of ResnetV2 and 3 feature maps from added auxulary layers (totally 6 feature maps) are used. 
+
+| Layer | Feature Map Size | 
+| :---: |   :---:      | 
+|   resnet_v2/block2   |    19*19     |
+|   resnet_v2/block3   |    10*10     | 
+|   resnet_v2/block4   |    10*10     | 
+|   layer 13   |     5*5      |  
+|   layer 14  |      3*3     |
+|   layer 15  |      1*1     |
 
 
 ### MobilenetV1
 
+To use MobilenetV1 as backbone, I add 4 auxulary convolution layers after the MobilenetV1. For object detection, 2 features maps from original layers of MobilenetV1 and 4 feature maps from added auxulary layers (totally 6 feature maps) are used. 
+
+| Layer | Feature Size | 
+| :---: |   :---:      | 
+|   Conv2d_5_pointwise   |    38*38     |
+|   Conv2d_11_pointwise   |    19*19     | 
+|   layer 12   |    10*10     | 
+|   layer 13   |     5*5      |  
+|   layer 14  |      3*3     |
+|   layer 15  |      1*1     |
+
 
 ### MobilenetV2
+
+To use MobilenetV2 as backbone, I add 4 auxulary convolution layers after the MobilenetV2. For object detection, 2 features maps from original layers of MobilenetV2 and 4 feature maps from added auxulary layers (totally 6 feature maps) are used. 
+
+| Layer | Feature Size | 
+| :---: |   :---:      | 
+|   Conv2d_5_pointwise   |    38*38     |
+|   Conv2d_11_pointwise   |    19*19     | 
+|   layer 12   |    10*10     | 
+|   layer 13   |     5*5      |  
+|   layer 14  |      3*3     |
+|   layer 15  |      1*1     |
 
 
 ### InceptionV4
 
+To use InceptionV4 as backbone, I add 2 auxulary convolution layers after the VGG16. For object detection, 4 features maps from original layers of InceptionV4 and 2 feature maps from added auxulary layers (totally 6 feature maps) are used. 
+
+| Layer | Feature Size | 
+| :---: |   :---:      | 
+|   Mixed_6d   |    17*17     |
+|   Mixed_6h   |    17*17     | 
+|   Mixed_7b   |    8*8     | 
+|   Mixed_7d   |     8*8      |  
+|   layer 13  |      4*4     |
+|   layer 14  |      2*2     |
 
 ### InceptionResnetV2
 
+To use InceptionResnetV2 as backbone, I add 4 auxulary convolution layers after the InceptionResnetV2. For object detection, 4 features maps from original layers of InceptionResnetV2 and 2 feature maps from added auxulary layers (totally 6 feature maps) are used. 
+
+| Layer | Feature Size | 
+| :---: |   :---:      | 
+|   Conv2d_4a_3x3   |    71*71     |
+|   MaxPool_5a_3x3   |    35*35     | 
+|   Mixed_6a   |    17*17     | 
+|   Mixed_7a   |     8*8      |  
+|   layer 13  |      4*4     |
+|   layer 14  |      2*2     |
 
 
 
