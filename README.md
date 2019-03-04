@@ -15,15 +15,15 @@ This implementation of SSD based on tensorflow is designed with the following go
 
 
 ## Prerequisite
-The main requirements ro run SSD can be installed by:
+The main requirements to run SSD can be installed by:
 
 ```bash
 pip install tensorflow    # For CPU
 pip install tensorflow-gpu  # For GPU
 
-# Install opencv for preprocessing training examples
-pip install opencv-python
+pip install opencv-python  # Opencv for processing images
 ```
+
 
 ## Datasets
 For training & testing, I used Pascal VOC datasets (2007 and 2012). 
