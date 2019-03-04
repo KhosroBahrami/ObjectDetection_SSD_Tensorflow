@@ -9,8 +9,8 @@ I will explain the details of using these backbones in SSD object detection, at 
 
 ## Introduction
 This implementation of SSD based on tensorflow is designed with the following goals:
-- Pipeline: it has full pipeline of object detection for demo, test and train with seperate modules.
-- Backbone Networks: it has 7 backbone networks, including: VGG, ResnetV1, ResnetV2, MobilenetV1, MobilenetV2, InceptionV4, InceptionResnetV2. Any new backbone can be easily added to the code.
+- Clear Pipeline: it has full pipeline of object detection for demo, test and train with seperate modules.
+- More Backbone Networks: it has 7 backbone networks, including: VGG, ResnetV1, ResnetV2, MobilenetV1, MobilenetV2, InceptionV4, InceptionResnetV2. Any new backbone can be easily added to the code.
 - Modularity: This code is modular and easy to expand for any specific application or new ideas.
 
 
