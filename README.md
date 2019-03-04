@@ -15,7 +15,7 @@ This implementation of SSD based on tensorflow is designed with the following go
 
 
 ## Prerequisite
-The main requirements can be installed by:
+The main requirements ro run SSD can be installed by:
 
 ```bash
 pip install tensorflow    # For CPU
