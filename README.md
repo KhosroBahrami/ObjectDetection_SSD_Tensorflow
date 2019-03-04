@@ -255,99 +255,99 @@ In this section, I explain the details of how I used different backbone networks
 
 ### VGG16
 
-To use VGG as backbone, I add 4 auxulary convolution layers after the VGG16. For object detection, 2 features maps from original layers of VGG16 and 4 feature maps from added auxulary layers (totally 6 feature maps) are used. 
+To use VGG as backbone, I add 4 auxiliary convolution layers after the VGG16. For object detection, 2 features maps from original layers of VGG16 and 4 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
 
-| Layer | Feature Map Size | 
-| :---: |   :---:      | 
-|   layer 4   |    38*38     |
-|   layer 7   |    19*19     | 
-|   layer 8   |    10*10     | 
-|   layer 9   |     5*5      |  
-|   layer 10  |      3*3     |
-|   layer 11  |      1*1     |
+| Layer | Feature Map Size | Layer Type  |  
+| :---: |   :---:      |  :---: | 
+|   layer 4   |    38*38     |  Original |
+|   layer 7   |    19*19     |  Original | 
+|   layer 8   |    10*10     |  auxiliary |  
+|   layer 9   |     5*5      |  auxiliary | 
+|   layer 10  |      3*3     |  auxiliary | 
+|   layer 11  |      1*1     |  auxiliary | 
 
 
 ### ResnetV1
 
-To use ResnetV1 as backbone, I add 3 auxulary convolution layers after the ResnetV1. For object detection, 3 features maps from original layers of ResnetV1 and 3 feature maps from added auxulary layers (totally 6 feature maps) are used. 
+To use ResnetV1 as backbone, I add 3 auxiliary convolution layers after the ResnetV1. For object detection, 3 features maps from original layers of ResnetV1 and 3 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
 
-| Layer | Feature Map Size | 
-| :---: |   :---:      | 
-|   resnet_v1/block2   |    19*19     |
-|   resnet_v1/block3   |    10*10     | 
-|   resnet_v1/block4   |    10*10     | 
-|   layer 13   |     5*5      |  
-|   layer 14  |      3*3     |
-|   layer 15  |      1*1     |
+| Layer | Feature Map Size | Layer Type  | 
+| :---: |   :---:      |  :---: |
+|   resnet_v1/block2   |    19*19     |  Original |
+|   resnet_v1/block3   |    10*10     |  Original |  
+|   resnet_v1/block4   |    10*10     |  Original | 
+|   layer 13   |     5*5      |  auxiliary | 
+|   layer 14  |      3*3     |  auxiliary | 
+|   layer 15  |      1*1     |  auxiliary | 
 
 
 ### ResnetV2
 
-To use ResnetV2 as backbone, I add 3 auxulary convolution layers after the ResnetV2. For object detection, 3 features maps from original layers of ResnetV2 and 3 feature maps from added auxulary layers (totally 6 feature maps) are used. 
+To use ResnetV2 as backbone, I add 3 auxiliary convolution layers after the ResnetV2. For object detection, 3 features maps from original layers of ResnetV2 and 3 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
 
-| Layer | Feature Map Size | 
-| :---: |   :---:      | 
-|   resnet_v2/block2   |    19*19     |
-|   resnet_v2/block3   |    10*10     | 
-|   resnet_v2/block4   |    10*10     | 
-|   layer 13   |     5*5      |  
-|   layer 14  |      3*3     |
-|   layer 15  |      1*1     |
+| Layer | Feature Map Size | Layer Type  |  
+| :---: |   :---:      |  :---: | 
+|   resnet_v2/block2   |    19*19     |  Original |
+|   resnet_v2/block3   |    10*10     |  Original | 
+|   resnet_v2/block4   |    10*10     |  Original | 
+|   layer 13   |     5*5      |  auxiliary |   
+|   layer 14  |      3*3     |  auxiliary | 
+|   layer 15  |      1*1     |  auxiliary | 
 
 
 ### MobilenetV1
 
-To use MobilenetV1 as backbone, I add 4 auxulary convolution layers after the MobilenetV1. For object detection, 2 features maps from original layers of MobilenetV1 and 4 feature maps from added auxulary layers (totally 6 feature maps) are used. 
+To use MobilenetV1 as backbone, I add 4 auxiliary convolution layers after the MobilenetV1. For object detection, 2 features maps from original layers of MobilenetV1 and 4 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
 
-| Layer | Feature Size | 
-| :---: |   :---:      | 
-|   Conv2d_5_pointwise   |    38*38     |
-|   Conv2d_11_pointwise   |    19*19     | 
-|   layer 12   |    10*10     | 
-|   layer 13   |     5*5      |  
-|   layer 14  |      3*3     |
-|   layer 15  |      1*1     |
+| Layer | Feature Size | Layer Type  |  
+| :---: |   :---:      |  :---: | 
+|   Conv2d_5_pointwise   |    38*38     |  Original |
+|   Conv2d_11_pointwise   |    19*19     |  Original | 
+|   layer 12   |    10*10     |  auxiliary |  
+|   layer 13   |     5*5      |   auxiliary |  
+|   layer 14  |      3*3     |  auxiliary | 
+|   layer 15  |      1*1     |  auxiliary | 
 
 
 ### MobilenetV2
 
-To use MobilenetV2 as backbone, I add 4 auxulary convolution layers after the MobilenetV2. For object detection, 2 features maps from original layers of MobilenetV2 and 4 feature maps from added auxulary layers (totally 6 feature maps) are used. 
+To use MobilenetV2 as backbone, I add 4 auxiliary convolution layers after the MobilenetV2. For object detection, 2 features maps from original layers of MobilenetV2 and 4 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
 
-| Layer | Feature Size | 
-| :---: |   :---:      | 
-|   Conv2d_5_pointwise   |    38*38     |
-|   Conv2d_11_pointwise   |    19*19     | 
-|   layer 12   |    10*10     | 
-|   layer 13   |     5*5      |  
-|   layer 14  |      3*3     |
-|   layer 15  |      1*1     |
+| Layer | Feature Size | Layer Type  |  
+| :---: |   :---:      |  :---: | 
+|   Conv2d_5_pointwise   |    38*38     |  Original |
+|   Conv2d_11_pointwise   |    19*19     |  Original | 
+|   layer 12   |    10*10     |  auxiliary |  
+|   layer 13   |     5*5      |  auxiliary |   
+|   layer 14  |      3*3     |  auxiliary | 
+|   layer 15  |      1*1     |  auxiliary | 
 
 
 ### InceptionV4
 
-To use InceptionV4 as backbone, I add 2 auxulary convolution layers after the VGG16. For object detection, 4 features maps from original layers of InceptionV4 and 2 feature maps from added auxulary layers (totally 6 feature maps) are used. 
+To use InceptionV4 as backbone, I add 2 auxiliary convolution layers after the VGG16. For object detection, 4 features maps from original layers of InceptionV4 and 2 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
 
-| Layer | Feature Size | 
-| :---: |   :---:      | 
-|   Mixed_6d   |    17*17     |
-|   Mixed_6h   |    17*17     | 
-|   Mixed_7b   |    8*8     | 
-|   Mixed_7d   |     8*8      |  
-|   layer 13  |      4*4     |
-|   layer 14  |      2*2     |
+| Layer | Feature Size | Layer Type  |  
+| :---: |   :---:      |  :---: | 
+|   Mixed_6d   |    17*17     |  Original |
+|   Mixed_6h   |    17*17     |  Original | 
+|   Mixed_7b   |    8*8     |  Original | 
+|   Mixed_7d   |     8*8      |  Original |  
+|   layer 13  |      4*4     |  auxiliary | 
+|   layer 14  |      2*2     |  auxiliary | 
 
 ### InceptionResnetV2
 
-To use InceptionResnetV2 as backbone, I add 4 auxulary convolution layers after the InceptionResnetV2. For object detection, 4 features maps from original layers of InceptionResnetV2 and 2 feature maps from added auxulary layers (totally 6 feature maps) are used. 
+To use InceptionResnetV2 as backbone, I add 4 auxiliary convolution layers after the InceptionResnetV2. For object detection, 4 features maps from original layers of InceptionResnetV2 and 2 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
 
-| Layer | Feature Size | 
-| :---: |   :---:      | 
-|   Conv2d_4a_3x3   |    71*71     |
-|   MaxPool_5a_3x3   |    35*35     | 
-|   Mixed_6a   |    17*17     | 
-|   Mixed_7a   |     8*8      |  
-|   layer 13  |      4*4     |
-|   layer 14  |      2*2     |
+| Layer | Feature Size | Layer Type  |  
+| :---: |   :---:      |  :---: | 
+|   Conv2d_4a_3x3   |    71*71     |  Original |
+|   MaxPool_5a_3x3   |    35*35     |  Original | 
+|   Mixed_6a   |    17*17     |  Original | 
+|   Mixed_7a   |     8*8      |  Original |  
+|   layer 13  |      4*4     |  auxiliary | 
+|   layer 14  |      2*2     |  auxiliary | 
 
 
 
