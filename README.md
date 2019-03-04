@@ -338,7 +338,7 @@ To use InceptionV4 as backbone, I add 2 auxiliary convolution layers after the V
 
 ### InceptionResnetV2
 
-To use InceptionResnetV2 as backbone, I add 4 auxiliary convolution layers after the InceptionResnetV2. For object detection, 4 features maps from original layers of InceptionResnetV2 and 2 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
+To use InceptionResnetV2 as backbone, I add 2 auxiliary convolution layers after the InceptionResnetV2. For object detection, 4 features maps from original layers of InceptionResnetV2 and 2 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
 
 | Layer | Feature Size | Layer Type  |  
 | :---: |   :---:      |  :---: | 
