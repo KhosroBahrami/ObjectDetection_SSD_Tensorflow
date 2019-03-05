@@ -122,7 +122,7 @@ The Training module has the following 4 steps:
 
 
 # How SSD works?
-SSD has been designed for object detection in real-time. In SSD, we only need to take one single shot to detect multiple objects within the image, while regional proposal network (RPN) based approaches such as Faster R-CNN needs two shots, one for generating region proposals, one for detecting the object of each proposal. Thus, SSD is much faster compared with two-shot RPN-based approaches. The following table compare SSD, Faster RCNN and YOLO.
+SSD has been designed for object detection in real-time. In SSD, we only need to take one single shot to detect multiple objects within the image, while regional proposal network (RPN) based approaches such as Faster R-CNN needs two steps, fisrt step for generating region proposals, and the second step for detecting the object of each proposal. Thus, SSD is much faster than two steps RPN-based approaches. The following table compares SSD, Faster RCNN and YOLO.
 
 | Object Detection Method | VOC2007 test mAP |  Speed (FPS) | Number of Prior Boxes | Input Resolution |
 | :---: |   :---:     | :---: | :---: | :---: |
@@ -134,7 +134,7 @@ SSD has been designed for object detection in real-time. In SSD, we only need to
 ### Backbone network & Feature maps
 The input of SSD is an image of fixed size, for example, 300x300 for SSD300. The image feeds into a CNN backbone network with several layers and generates multiple feature maps at different scales. 
 
-Features maps (i.e. the results of the convolutional blocks) are a representation of the dominant features of the image at different scales, therefore running MultiBox on multiple feature maps increases the likelihood of any object (large and small) to be eventually detected, localized and appropriately classified. The image below shows how the network “sees” a given image across its feature maps:
+Features maps (i.e. the results of the convolutional blocks) represent the dominant features of the image at different scales, therefore using multiple feature maps increases the likelihood of any object (large and small) to be eventually detected, localized and appropriately classified. The image below shows how the network “sees” a given image across its feature maps:
 
 ![Alt text](figs/vgg_feature.png?raw=true "VGG Feature Map Visualisation (from Brown Uni)")
 
