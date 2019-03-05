@@ -45,8 +45,8 @@ $ python3 ssd_image_to_tf.py
 The resulted tf records will be stored into tfrecords_test and tfrecords_train folders.
 
 ## Configuration
-Before running the code, you need to touch the configuration based on your needs. We have 5 config files in /configs:
-- config_general.py: in this file, you can indicate the backbone model that you want to use for train, test and demo. You should uncomment only one of the models to use as backbone. Also, you can indicate the traning mode. 
+Before running the code, you need to touch the configuration based on your needs. There are 5 config files in /configs:
+- config_general.py: in this file, you can indicate the backbone model that you want to use for train, test and demo. You should uncomment only one of the models to use as backbone. Also, you can indicate the training mode. 
 - config_general.py: this file includes the common parameters that are used in training, testing and demo.   
 - config_train.py: this file includes training parameters.  
 - config_test.py: this file includes testing parameters.  
@@ -54,6 +54,7 @@ Before running the code, you need to touch the configuration based on your needs
 
 
 ## Demo of SSD
+For demo, you can run SSD for object detection in a single image.  
 Demo uses the pretrained model that has been stored in /checkpoints/ssd_... .
 
 To run the demo, use the following command:
@@ -65,9 +66,13 @@ The demo module has the following 6 steps:
 1) Define a placeholder for the input image 
 2) Preprocessing step
 3) Create SSD model
-4) Inference, calculate output of network
+4) Inference, calculate output of the SSD network
 5) Postprocessing
 6) Visualization & Evaluation
+
+The Output of demo is the image with bounding boxes. The follwing image shows an example of demo:
+
+#![Alt text](figs/s_bb.png?raw=true "1 Object detection example")
 
 
 ## Evaluating (Testing) SSD 
