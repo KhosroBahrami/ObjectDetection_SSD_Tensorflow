@@ -254,7 +254,7 @@ For object detection, we feed an image into the SSD model, the priors of the fea
 
 
 # Using backbone networks in SSD: 
-In this section, I explain the details of how I used different backbone networks for SSD object detection.   
+In this section, I explain how I used different backbone networks for SSD object detection.   
 
 
 ### VGG16
