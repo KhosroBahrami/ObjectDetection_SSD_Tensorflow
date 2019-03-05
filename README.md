@@ -72,11 +72,10 @@ The demo module has the following 6 steps:
 
 The Output of demo is the image with bounding boxes. The follwing image shows an example of demo:
 
-#![Alt text](figs/s_bb.png?raw=true "1 Object detection example")
 
 
 ## Evaluating (Testing) SSD 
-Test module uses the pretrained model that has been stored in /checkpoints/ssd_... . 
+This module evaluates the accuracy of SSD with a pretrained model (stored in /checkpoints/ssd_...) for a testing dataset. 
 
 To test the SSD, use the following command:
 ```python
@@ -95,16 +94,16 @@ Evaluation module has the following 6 steps:
 
 
 ## Training SSD
-We have 3 modes for training:
-- Training an existing SSD boject detection for a spacific dataset or new sets of parameters. 
+We have 3 modes for training of SSD:
+- Training an existing SSD model for a new object detection dataset or new sets of parameters. 
 - Training (first step fine-tuning) SSD based on an existing ImageNet classification model.
 - Training (second step fine-tuning) SSD based on an existing ImageNet classification model.
 
 The mode should be specified in configs/config_general.py.
 
-The input of training should be in /checkpoints/[model_name]
+The input model of training should be in /checkpoints/[model_name]
 
-the output of training will be store in checkpoints/ssd_[model_name]
+the output model of training will be stored in checkpoints/ssd_[model_name]
 
 
 To train the SSD, use the following command:
