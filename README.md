@@ -122,7 +122,7 @@ The Training module has the following 4 steps:
 
 
 # How SSD works?
-SSD has been designed for object detection in real-time. In SSD, we only need to take one single shot to detect multiple objects within the image, while regional proposal network (RPN) based approaches such as Faster R-CNN needs two steps, fisrt step for generating region proposals, and the second step for detecting the object of each proposal. Thus, SSD is much faster than two steps RPN-based approaches. The following table compares SSD, Faster RCNN and YOLO.
+SSD has been designed for object detection in real-time. In SSD, we only need to take one single shot to detect multiple objects within the image, while regional proposal network (RPN) based approaches such as Faster R-CNN needs two steps, first step for generating region proposals, and the second step for detecting the object of each proposal. Thus, SSD is much faster than two steps RPN-based approaches. The following table compares SSD, Faster RCNN and YOLO.
 
 | Object Detection Method | VOC2007 test mAP |  Speed (FPS) | Number of Prior Boxes | Input Resolution |
 | :---: |   :---:     | :---: | :---: | :---: |
