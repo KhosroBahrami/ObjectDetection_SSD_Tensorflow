@@ -189,7 +189,6 @@ Therefore:
 - Conv11_2: 1×1×4 = 4 boxes (4 boxes for each location)
 
 If we sum them up, we got 5776 + 2166 + 600 + 150 + 36 +4 = 8732 boxes in total for SSD. 
-In YOLO, there are 7×7 locations at the end with 2 bounding boxes for each location. YOLO only got 7×7×2 = 98 boxes. Hence, SSD has 8732 bounding boxes which is more than that of YOLO.
 
 
 
