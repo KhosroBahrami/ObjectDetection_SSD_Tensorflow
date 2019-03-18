@@ -145,7 +145,7 @@ For example, for VGG backbone network, the first feature map is generated from l
 To train the network, one needs to compare the ground truth (a list of objects) against the prediction map. This is achieved with the help of prior boxes.
 
 ### Prior boxes (Anchor points) 
-Intuitively, object detection is a local task: what is in the top left corner of an image is usually unrelated to predict an object in the bottom right corner of the image. So one needs to measure how relevance each ground truth is to each prediction. The criterion for matching a prior and a ground-truth box is IoU (Intersection Over Union), which is also called Jaccard index. The more overlap, the better match. Also, to have the same block size, the ground-truth boxes should be scaled to the same scale.
+Object detection is a local task, meaning that prediction of an object in top left corner of an image is usually unrelated to predict an object in the bottom right corner of the image. So one needs to measure how relevance each ground truth is to each prediction. The criterion for matching a prior and a ground-truth box is IoU (Intersection Over Union), which is also called Jaccard index. The more overlap, the better match. Also, to have the same block size, the ground-truth boxes should be scaled to the same scale.
 
 The procedure for matching prior boxes with ground-truth boxes is as follows:
 - We put one priorbox at each location in the prediction map.
@@ -156,7 +156,7 @@ The procedure for matching prior boxes with ground-truth boxes is as follows:
 
 Also, usually, different sizes for predictions at different scales are used. For example, SSD300 uses 21, 45, 99, 153, 207, 261 as the sizes of the priorbox at its 6 different prediction layers.
 
-In practice, SSD uses a few different types of priorbox, each with a different scale or aspect ratio, in a single layer. Doing so creates different "experts" for detecting objects of different shapes. For example, SSD300 use ... types of different priorboxes for its seven prediction layers, whereas the aspect ratio of these priorboxes can be chosen from 1:3, 1:2, 1:1, 2:1 or 3:1. Notice, experts in the same layer take the same underlying input (the same receptive field). They behave differently because they use different parameters (convolutional filters) and use different ground truth fetch by different priorboxes.
+In practice, SSD uses a few different types of priorbox, each with a different scale or aspect ratio, in a single layer. Doing so creates different "experts" for detecting objects of different shapes. For example, SSD300 uses 5 types of different priorboxes for its seven prediction layers, whereas the aspect ratio of these priorboxes can be chosen from 1:3, 1:2, 1:1, 2:1 or 3:1. Notice, experts in the same layer take the same underlying input (the same receptive field). They behave differently because they use different parameters (convolutional filters) and use different ground truth fetch by different priorboxes.
 
 ### Scales and Aspect Ratios of Prior Boxes
 Size of default prior boxes are chosen manually. SSD defines a scale value for each feature map layer. Starting from first feature map, Conv4_3 detects objects at the smallest scale 0.2 (or 0.1 sometimes) and then increases linearly to the last layer (Conv11_2) at a scale of 0.9. Combining the scale value with the target aspect ratios, we compute the width and the height of the default boxes. For layers making 6 predictions, SSD starts with 5 target aspect ratios: 1, 2, 3, 1/2 and 1/3. 
