@@ -132,9 +132,7 @@ SSD has been designed for object detection in real-time. In SSD, we only need to
 | SSD512 (VGG16) | 76.9% | 22 | 24564 | 512*512 |
 
 ### Backbone network & Feature maps
-The input of SSD is an image of fixed size, for example, 300x300 for SSD300. The image feeds into a CNN backbone network with several layers and generates multiple feature maps at different scales. 
-
-Features maps (i.e. the results of the convolutional blocks) represent the dominant features of the image at different scales, therefore using multiple feature maps increases the likelihood of any object (large and small) to be eventually detected, localized and appropriately classified. The following figure shows feature maps of a network for a given image at different levels:
+The input of SSD is an image of fixed size, for example, 300x300 for SSD300. The image feeds into a CNN backbone network with several layers and generates multiple feature maps at different scales. Features maps (i.e. the results of the convolutional blocks) represent the dominant features of the image at different scales, therefore using multiple feature maps increases the likelihood of any object (large and small) to be eventually detected, localized and appropriately classified. The following figure shows feature maps of a network for a given image at different levels:
 
 ![Alt text](figs/vgg_feature.png?raw=true "VGG Feature Map Visualisation (from Brown Uni)")
 
