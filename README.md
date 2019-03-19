@@ -255,7 +255,7 @@ In this section, I explain how I used different backbone networks for SSD object
 
 ### VGG16
 
-To use VGG as backbone, I add 4 auxiliary convolution layers after the VGG16. For object detection, 2 features maps from original layers of VGG16 and 4 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
+To use VGG as backbone, I add 4 auxiliary convolution layers after the VGG16. For object detection, 2 features maps from original layers of VGG16 and 4 feature maps from added auxiliary layers (totally 6 feature maps) are used in multibox detection. 
 
 | Layer | Feature Map Size | Layer Type  |  
 | :---: |   :---:      |  :---: | 
@@ -269,7 +269,7 @@ To use VGG as backbone, I add 4 auxiliary convolution layers after the VGG16. Fo
 
 ### ResnetV1
 
-To use ResnetV1 as backbone, I add 3 auxiliary convolution layers after the ResnetV1. For object detection, 3 features maps from original layers of ResnetV1 and 3 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
+To use ResnetV1 as backbone, I add 3 auxiliary convolution layers after the ResnetV1. For object detection, 3 features maps from original layers of ResnetV1 and 3 feature maps from added auxiliary layers (totally 6 feature maps) are used in multibox detection. 
 
 | Layer | Feature Map Size | Layer Type  | 
 | :---: |   :---:      |  :---: |
@@ -283,7 +283,7 @@ To use ResnetV1 as backbone, I add 3 auxiliary convolution layers after the Resn
 
 ### ResnetV2
 
-To use ResnetV2 as backbone, I add 3 auxiliary convolution layers after the ResnetV2. For object detection, 3 features maps from original layers of ResnetV2 and 3 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
+To use ResnetV2 as backbone, I add 3 auxiliary convolution layers after the ResnetV2. For object detection, 3 features maps from original layers of ResnetV2 and 3 feature maps from added auxiliary layers (totally 6 feature maps) are used in multibox detection. 
 
 | Layer | Feature Map Size | Layer Type  |  
 | :---: |   :---:      |  :---: | 
@@ -297,7 +297,7 @@ To use ResnetV2 as backbone, I add 3 auxiliary convolution layers after the Resn
 
 ### MobilenetV1
 
-To use MobilenetV1 as backbone, I add 4 auxiliary convolution layers after the MobilenetV1. For object detection, 2 features maps from original layers of MobilenetV1 and 4 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
+To use MobilenetV1 as backbone, I add 4 auxiliary convolution layers after the MobilenetV1. For object detection, 2 features maps from original layers of MobilenetV1 and 4 feature maps from added auxiliary layers (totally 6 feature maps) are used in multibox detection. 
 
 | Layer | Feature Size | Layer Type  |  
 | :---: |   :---:      |  :---: | 
@@ -311,7 +311,7 @@ To use MobilenetV1 as backbone, I add 4 auxiliary convolution layers after the M
 
 ### MobilenetV2
 
-To use MobilenetV2 as backbone, I add 4 auxiliary convolution layers after the MobilenetV2. For object detection, 2 features maps from original layers of MobilenetV2 and 4 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
+To use MobilenetV2 as backbone, I add 4 auxiliary convolution layers after the MobilenetV2. For object detection, 2 features maps from original layers of MobilenetV2 and 4 feature maps from added auxiliary layers (totally 6 feature maps) are used in multibox detection. 
 
 | Layer | Feature Size | Layer Type  |  
 | :---: |   :---:      |  :---: | 
@@ -325,7 +325,7 @@ To use MobilenetV2 as backbone, I add 4 auxiliary convolution layers after the M
 
 ### InceptionV4
 
-To use InceptionV4 as backbone, I add 2 auxiliary convolution layers after the VGG16. For object detection, 4 features maps from original layers of InceptionV4 and 2 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
+To use InceptionV4 as backbone, I add 2 auxiliary convolution layers after the VGG16. For object detection, 4 features maps from original layers of InceptionV4 and 2 feature maps from added auxiliary layers (totally 6 feature maps) are used in multibox detection. 
 
 | Layer | Feature Size | Layer Type  |  
 | :---: |   :---:      |  :---: | 
@@ -338,7 +338,7 @@ To use InceptionV4 as backbone, I add 2 auxiliary convolution layers after the V
 
 ### InceptionResnetV2
 
-To use InceptionResnetV2 as backbone, I add 2 auxiliary convolution layers after the InceptionResnetV2. For object detection, 4 features maps from original layers of InceptionResnetV2 and 2 feature maps from added auxiliary layers (totally 6 feature maps) are used. 
+To use InceptionResnetV2 as backbone, I add 2 auxiliary convolution layers after the InceptionResnetV2. For object detection, 4 features maps from original layers of InceptionResnetV2 and 2 feature maps from added auxiliary layers (totally 6 feature maps) are used in multibox detection. 
 
 | Layer | Feature Size | Layer Type  |  
 | :---: |   :---:      |  :---: | 
