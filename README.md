@@ -195,13 +195,13 @@ If we sum them up, we got 5776 + 2166 + 600 + 150 + 36 +4 = 8732 boxes in total 
 
 ### MultiBox Detection 
 
-Multi-scale Detection: The resolution of the detection equals the size of its prediction map. Multi-scale detection is achieved by generating prediction maps of different resolutions. For example, SSD512 outputs seven prediction maps of resolutions 64x64, 32x32, 16x16, 8x8, 4x4, 2x2, and 1x1 respectively. You can think there are 5461 "local prediction" behind the scene. The input of each prediction is effectively the receptive field of the output feature.
+In this step, SSD does the Multi-scale Detection. The resolution of the detection equals the size of its prediction map. Multi-scale detection is achieved by generating prediction maps of different resolutions. For example, SSD300 outputs 6 prediction maps of resolutions 38x38, 19x19, 10x10, 5x5, 3x3, and 1x1 respectively. Use these 56 feature maps, SSD does 8732 local prediction. 
 
 
 ### Hard Negative Mining
 Priorbox uses a distance-based metric (IoU) to create ground truth predictions, including backgrounds (no matched objects) and objects. However, there can be an imbalance between foreground samples and background samples. There are a lot more unmatched priors (priors without any object). In consequence, the detector may produce many false negatives due to the lack of a training signal of foreground objects. In other words, the huge number of priors labelled as background make the dataset very unbalanced.
 
-To address this problem, SSD uses hard negative mining: all background samples are sorted by their predicted background scores in the ascending order. Only the top K samples are kept for proceeding to the computation of the loss. K is computed on the fly for each batch to keep a 1:3 ratio between foreground samples and background samples.
+To address this problem, SSD uses Hard Negative Mining (HNM). In HNM, all background samples are sorted by their predicted background scores in the ascending order. Only the top K samples are kept for proceeding to the computation of the loss. K is computed on the fly for each batch to keep a 1:3 ratio between foreground samples and background samples.
 
 However, we make far more predictions than the number of objects presence. So there are much more negative matches than positive matches. This creates a class imbalance which hurts training. We are training the model to learn background space rather than detecting objects. However, SSD still requires negative sampling so it can learn what constitutes a bad prediction. So, instead of using all the negatives, we sort those negatives by their calculated confidence loss. SSD picks the negatives with the top loss and makes sure the ratio between the picked negatives and positives is at most 3:1. This leads to a faster and more stable training.
 
@@ -215,7 +215,7 @@ SSD predictions are classified as positive matches or negative matches. SSD only
 
 
 ### Image Augmentation
-The authors of SSD stated that data augmentation, like in many other deep learning applications, has been crucial to teach the network to become more robust to various object sizes in the input. To this end, they generated additional training examples with patches of the original image at different IoU ratios (e.g. 0.1, 0.3, 0.5, etc.) and random patches as well. Moreover, each image is also randomly horizontally flipped with a probability of 0.5, thereby making sure potential objects appear on left and right with similar likelihood.
+SSD like many other deep learning applications use data augmentation on training images. This step is crucial to teach the network to become more robust to various object sizes in the input. In image augmentation, SSD generates additional training examples with patches of the original image at different IoU ratios (e.g. 0.1, 0.3, 0.5, etc.) and random patches as well. Moreover, each image is also randomly horizontally flipped with a probability of 0.5, thereby making sure potential objects appear on left and right with similar likelihood.
 
 Data augmentation is important in improving accuracy. Augment data with flipping, cropping and color distortion. To handle variants in various object sizes and shapes, each training image is randomly sampled by one of the following options:
 
