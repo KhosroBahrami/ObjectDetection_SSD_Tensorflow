@@ -70,7 +70,7 @@ The demo module has the following 6 steps:
 5) Postprocessing
 6) Visualization & Evaluation
 
-The Output of demo is the image with bounding boxes. The follwing image shows an example of demo:
+The Output of demo is the image with bounding boxes. The following image shows an example of demo:
 
 
 
