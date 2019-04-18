@@ -148,11 +148,11 @@ To train the network, one needs to compare the ground truth (a list of objects) 
 Object detection is a local task, meaning that prediction of an object in top left corner of an image is usually unrelated to predict an object in the bottom right corner of the image. So one needs to measure how relevance each ground truth is to each prediction. The criterion for matching a prior and a ground-truth box is IoU (Intersection Over Union), which is also called Jaccard index. The more overlap, the better match. Also, to have the same block size, the ground-truth boxes should be scaled to the same scale.
 
 The procedure for matching prior boxes with ground-truth boxes is as follows:
-- We put one priorbox at each location in the prediction map.
-- We compute IoU between the priorbox and the ground-truth.
+- Put one priorbox at each location in the prediction map.
+- Compute IoU between the priorbox and the ground-truth.
 - The ground-truth object that has the highest IoU is used as the target for each prediction, given its IoU is higher than a threshold.
 - For predictions who have no valid match, the target class is set to the background class and they will not be used for calculating the localization loss.
-- If there is significant overlapping between a priorbox and a ground-truth object, then the ground-truth can be used at that location. The class of the ground-truth is directly used to compute the classification loss; whereas the offset between the ground-truth bounding box and the priorbox is used to compute the location loss.
+- If there is significant overlapping between a priorbox and a ground-truth object, then the ground-truth can be used at that location. The class of the ground-truth is directly used to compute the classification loss & the offset between the ground-truth bounding box and the priorbox is used to compute the location loss.
 
 Also, usually, different sizes for predictions at different scales are used. For example, SSD300 uses 21, 45, 99, 153, 207, 261 as the sizes of the priorbox at its 6 different prediction layers.
 
