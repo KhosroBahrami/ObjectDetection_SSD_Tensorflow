@@ -138,7 +138,7 @@ The input of SSD is an image of fixed size, for example, 300x300 for SSD300. The
 
 The CNN backbone network (VGG, Mobilenet, ...) gradually reduces the feature map size and increase the depth as it goes to the deeper layers. The deep layers cover larger receptive fields and construct more abstract representation, while the shallow layers cover smaller receptive fields. By using extracted features at different levels, we can use shallow layers to predict small objects and deeper layers to predict large objects.
 
-The output of SSD is a prediction map. Each location in this map stores classes confidence and bounding box information as if there is indeed an object of interests at every location. Obviously, there will be a lot of false alarms, so a further process is used to select a list of predictions.
+The output of SSD is a set of prediction maps. In each map, every location stores classes confidence and bounding box information. Obviously, there will be a lot of false alarms, so a further process is used to select a list of predictions.
 
 For example, for VGG backbone network, the first feature map is generated from layer 23 with a size of 38x38 of depth 512. Every point in the 38x38 feature map represents a part of the image, and the 512 channels are the features for every point. By using the features of 512 channels, we can predict the class label (using classification) and the bounding box (using regression) of the small objects on every point. The second feature map has a size of 19x19, which can be used for larger objects, as the points of the features cover larger receptive fields. Finally, in the last layer, there is only one point in the feature map which is used for big objects.
 
