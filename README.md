@@ -163,9 +163,9 @@ Suppose we have m feature maps for prediction, we can calculate scale Sk for the
 
 ![Alt text](figs/scale_bb.png?raw=true "Scale of Default Boxes")
 
-For m=6 feature maps, the scales for the first to the last feature maps are 0.2, 0.34, 0.48, 0.62, 0.76, 0.9, respectively. In which, all layers in between is regularly spaced. 
+For m=6 feature maps, the scales for the first to the last feature maps (S1 to S6) are 0.2, 0.34, 0.48, 0.62, 0.76, 0.9, respectively. In which, all layers in between is regularly spaced. 
 
-Usinf these scales, the width and height of default boxes are calculated as:
+Using these scales, the width and height of default boxes are calculated as:
 
 ![Alt text](figs/ns_bb.png?raw=true "5 Non-Square Bounding Boxes")
 
