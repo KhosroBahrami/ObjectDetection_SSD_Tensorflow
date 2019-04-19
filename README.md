@@ -158,7 +158,7 @@ Also, in SSD, different sizes for predictions at different scales are used. For 
 In practice, SSD uses a few different types of priorbox, each with a different scale or aspect ratio, in a single layer. For example, SSD300 uses 5 types of different priorboxes for its 6 prediction layers, whereas the aspect ratio of these priorboxes can be chosen from 1:3, 1:2, 1:1, 2:1 or 3:1. Notice, in the same layer, priorboxes take the same receptive field, but they behave differently due to different parameters (convolutional filters).
 
 ### Scales and Aspect Ratios of Prior Boxes
-Size of default prior boxes are chosen manually. SSD defines a scale value for each feature map layer. Starting from first feature map, Conv4_3 detects objects at the smallest scale 0.2 and then increases linearly to the last layer (Conv11_2) at a scale of 0.9. By combining the scale value with the target aspect ratios, we can compute the width and the height of the default boxes. For layers making 6 predictions, SSD starts with 5 target aspect ratios: 1, 2, 3, 1/2 and 1/3. 
+Size of default prior boxes are chosen manually. SSD defines a scale value for each feature map layer. Starting from first feature map, Conv4_3 detects objects at the smallest scale 0.2 and then increases linearly to the last layer (Conv11_2) at a scale of 0.9. By combining the scale value with the target aspect ratios, we can compute the width and the height of the default boxes. For layers making 6 predictions, SSD starts with 5 target aspect ratios: 1, 2, 3, 1/2 and 1/3 and for layers with 4 bounding boxes, 1/3 and 3 are omitted. 
 Suppose we have m feature maps for prediction, we can calculate Sk for the k-th feature map by assuming Smin= 0.2 & Smax=0.9 (the scale at the lowest layer is 0.2 and the scale at the highest layer is 0.9) via 
 ![Alt text](figs/scale_bb.png?raw=true "Scale of Default Boxes")
 
@@ -170,7 +170,7 @@ For each scale, sk, we have 5 non-square aspect ratios. The width and the height
 Then, SSD adds an extra prior box for aspect ratio of 1:1, as:
 ![Alt text](figs/s_bb.png?raw=true "1 Square Bounding Box")
 
-Therefore, we can have at most 6 bounding boxes in total with different aspect ratios. For layers with only 4 bounding boxes, 1/3 and 3 are omitted.
+Therefore, we can have at most 6 bounding boxes in total with different aspect ratios. 
 
 Note: YOLO uses k-means clustering on the training dataset to determine those default boundary boxes.
 
