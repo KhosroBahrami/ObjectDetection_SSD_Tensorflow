@@ -163,12 +163,12 @@ Suppose we have m feature maps for prediction, we can calculate Sk for the k-th 
 
 ![Alt text](figs/scale_bb.png?raw=true "Scale of Default Boxes")
 
-In which, all layers in between is regularly spaced.
+In which, all layers in between is regularly spaced. The width and height of default boxes are calculated as:
 
-For each scale, sk, we have 5 non-square aspect ratios. The width and the height of the default boxes are calculated as:
 ![Alt text](figs/ns_bb.png?raw=true "5 Non-Square Bounding Boxes")
 
 Then, SSD adds an extra prior box for aspect ratio of 1:1, as:
+
 ![Alt text](figs/s_bb.png?raw=true "1 Square Bounding Box")
 
 Therefore, we can have at most 6 bounding boxes in total with different aspect ratios. 
