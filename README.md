@@ -160,6 +160,7 @@ In practice, SSD uses a few different types of priorbox, each with a different s
 ### Scales and Aspect Ratios of Prior Boxes
 Size of default prior boxes are chosen manually. SSD defines a scale value for each feature map layer. Starting from first feature map, Conv4_3 detects objects at the smallest scale 0.2 and then increases linearly to the last layer (Conv11_2) at a scale of 0.9. By combining the scale value with the target aspect ratios, we can compute the width and the height of the default boxes. For layers with 6 bounding box predictions, there are 5 target aspect ratios: 1, 2, 3, 1/2 and 1/3 and for layers with 4 bounding boxes, 1/3 and 3 are omitted. 
 Suppose we have m feature maps for prediction, we can calculate Sk for the k-th feature map by assuming Smin= 0.2 & Smax=0.9 (the scale at the lowest layer is 0.2 and the scale at the highest layer is 0.9) via 
+
 ![Alt text](figs/scale_bb.png?raw=true "Scale of Default Boxes")
 
 In which, all layers in between is regularly spaced.
