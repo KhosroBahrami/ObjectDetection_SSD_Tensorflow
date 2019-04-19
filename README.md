@@ -180,10 +180,10 @@ Note: YOLO uses k-means clustering on the training dataset to determine those de
 
 ### Number of Prior Boxses: 
 The number of prior boxes is calculated as follow. For VGG16 as backbone, 6 feature maps from layers Conv4_3, Conv7, Conv8_2, Conv9_2, Conv10_2 and Conv11_2 are used. 
-At Conv4_3, feature map is of size 38×38×512. There are 4 bounding boxes for each location in the map and each bounding box has (Cn + Ln) outputs, where Cn is number of classes and Ln is number of parameters for localization (x, y, w, h). Thus, at Conv4_3, the output is 38×38×4×(Cn+4). Suppose there are 20 object classes plus one background class, the output is 38×38×4×(21+4) = 144,400. Each prediction composes of a boundary box and 21 scores for each class (one extra class for no object), and we pick the highest score as the class for the bounded object. Conv4_3 makes a total of 38 × 38 × 4 predictions: four predictions per cell regardless of the depth of the feature maps. As expected, many predictions contain no object. SSD reserves a class “0” to indicate it has no objects. Each prediction includes a boundary box and 21 scores for 21 classes (one class for no object). Making multiple predictions containing boundary boxes and confidence scores is called multibox.
+At Conv4_3, feature map is of size 38×38×512. There are 4 bounding boxes for each location in the map and each bounding box has (Cn + Ln) outputs, where Cn is number of classes and Ln is number of parameters for localization (x, y, w, h). Thus, at Conv4_3, the output has 38×38×4×(Cn+4) values. Suppose there are 20 object classes plus one background class, the output has 38×38×4×(21+4) = 144,400 values. To consider all 6 feature maps, we make multiple predictions containing boundary boxes and confidence scores from all 6 feature maps which is called multibox.
 
-In terms of number of bounding boxes, there are 38×38×4 = 5776 bounding boxes.
-Therefore:
+In terms of number of bounding boxes, there are 38×38×4 = 5776 bounding boxes for 6 feature maps.
+Therefore, for different feature maps, we can calculate the numberf on bounding boxes as 
 - Conv4_3: 38×38×4 = 5776 boxes (4 boxes for each location)
 - Conv7: 19×19×6 = 2166 boxes (6 boxes for each location)
 - Conv8_2: 10×10×6 = 600 boxes (6 boxes for each location)
