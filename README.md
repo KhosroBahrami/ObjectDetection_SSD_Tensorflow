@@ -180,7 +180,7 @@ Note: YOLO uses k-means clustering on the training dataset to determine those de
 
 ### Number of Prior Boxses: 
 The number of prior boxes is calculated as follow. For VGG16 as backbone, 6 feature maps from layers Conv4_3, Conv7, Conv8_2, Conv9_2, Conv10_2 and Conv11_2 are used. 
-At Conv4_3, feature map is of size 38×38×512. There are 4 bounding boxes for each location in the map and each bounding box has (Cn + Ln) outputs, where Cn is number of classes and Ln is number of parameters for localization (x, y, w, h). Thus, at Conv4_3, the output has 38×38×4×(Cn+4) values. Suppose there are 20 object classes plus one background class, the output has 38×38×4×(21+4) = 144,400 values. To consider all 6 feature maps, we make multiple predictions containing boundary boxes and confidence scores from all 6 feature maps which is called multibox.
+At Conv4_3, feature map is of size 38×38×512. There are 4 bounding boxes for each location in the map and each bounding box has (Cn + Ln) outputs, where Cn is number of classes and Ln is number of parameters for localization (x, y, w, h). Thus, at Conv4_3, the output has 38×38×4×(Cn+4) values. Suppose there are 20 object classes plus one background class, the output has 38×38×4×(21+4) = 144,400 values. 
 
 In terms of number of bounding boxes, there are 38×38×4 = 5776 bounding boxes for 6 feature maps.
 Therefore, for different feature maps, we can calculate the numberf on bounding boxes as 
@@ -193,12 +193,8 @@ Therefore, for different feature maps, we can calculate the numberf on bounding 
 
 If we sum them up, we got 5776 + 2166 + 600 + 150 + 36 +4 = 8732 boxes in total for SSD. 
 
-
-
-
 ### MultiBox Detection 
-
-In this step, SSD does the Multi-scale Detection. The resolution of the detection equals the size of its prediction map. Multi-scale detection is achieved by generating prediction maps of different resolutions. For example, SSD300 outputs 6 prediction maps of resolutions 38x38, 19x19, 10x10, 5x5, 3x3, and 1x1 respectively. Use these 56 feature maps, SSD does 8732 local prediction. 
+To consider all 6 feature maps, we make multiple predictions containing boundary boxes and confidence scores from all 6 feature maps which is called multibox detection. The resolution of the detection equals the size of its prediction map. Multi-scale detection is achieved by generating prediction maps of different resolutions. For example, SSD300 outputs 6 prediction maps of resolutions 38x38, 19x19, 10x10, 5x5, 3x3, and 1x1 respectively and use these 6 feature maps for 8732 local prediction. 
 
 
 ### Hard Negative Mining
