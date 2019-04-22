@@ -223,12 +223,10 @@ Data augmentation is important in improving accuracy. SSD uses data augmentation
 ### Loss function
 In SSD, multibox loss function is the combination of localization loss (regression loss) and confidence loss (classification loss):
 
-Localization loss: This measures how far away the network’s predicted bounding boxes are from the ground truth ones from the training set. It is the smooth L1 (L2) loss between the predicted box (l) and the ground-truth box (g) parameters. These parameters include the offsets for the center point (cx, cy), width (w) and height (h) of the bounding box. This loss is similar to the one in Faster R-CNN.
-The localization loss is the mismatch between the ground truth box and the predicted boundary box. SSD only penalizes predictions from positive matches. We want the predictions from the positive matches to get closer to the ground truth. Negative matches can be ignored.
+Localization loss: This measures how far away the network’s predicted bounding boxes are from the ground-truth ones. It is the smooth L1 (L2) loss between the predicted box (l) and the ground-truth box (g) parameters. These parameters include offsets of the center point (cx, cy), width (w) and height (h) of the bounding box. This loss is similar to the one in Faster R-CNN. The localization loss is the mismatch between the ground-truth box and the predicted boundary box. SSD only penalizes predictions from positive matches. The goal is the predictions from the positive matches to be closer to the ground-truth. Negative matches are ignored for localization loss calculations.
 
-Confidence loss: is the confidence loss which is the softmax loss over multiple classes confidences.
-this measures how confident the network is of the objectness of the computed bounding box. Categorical cross-entropy is used to compute this loss.
-The confidence loss is the loss in making a class prediction. For every positive match prediction, we penalize the loss according to the confidence score of the corresponding class. For negative match predictions, we penalize the loss according to the confidence score of the class “0”: class “0” classifies no object is detected.
+Confidence loss: is the claccification loss which is the softmax loss over multiple classes confidences. This measures the confident of the network in objectness of the computed bounding box. Categorical cross-entropy is used to compute this loss.
+The confidence loss is the loss in making a class prediction. For every positive match prediction, we penalize the loss according to the confidence score of the corresponding class. For negative match predictions, we penalize the loss according to the confidence score of the class 0 (no object is detected).
 
 multibox_loss = 1/N *(confidence_loss + α * location_loss)
 
