@@ -212,12 +212,10 @@ SSD predictions are classified as positive matches or negative matches. SSD only
 
 
 ### Image Augmentation
-SSD like many other deep learning applications use data augmentation on training images. This step is crucial to teach the network to become more robust to various object sizes in the input. In image augmentation, SSD generates additional training examples with patches of the original image at different IoU ratios (e.g. 0.1, 0.3, 0.5, etc.) and random patches as well. Moreover, each image is also randomly horizontally flipped with a probability of 0.5, thereby making sure potential objects appear on left and right with similar likelihood.
+Data augmentation is important in improving accuracy. SSD uses data augmentation on training images. This step is crucial in network training to become more robust to various object sizes in the input. In image augmentation, SSD generates additional training examples with patches of the original image at different IoU ratios (e.g. 0.1, 0.3, 0.5, etc.) and random patches as well. Moreover, each image is also randomly horizontally flipped with a probability of 0.5, to make sure the objects appear on left and right with similar likelihood. Laso, it uses flipping, cropping and color distortion. To handle variants in various object sizes and shapes, each training image is randomly sampled by one of the followings:
 
-Data augmentation is important in improving accuracy. Augment data with flipping, cropping and color distortion. To handle variants in various object sizes and shapes, each training image is randomly sampled by one of the following options:
-
-- Use the original,
-- Sample a patch with IoU of 0.1, 0.3, 0.5, 0.7 or 0.9,
+- Use the original.
+- Sample a patch with IoU of 0.1, 0.3, 0.5, 0.7 or 0.9.
 - Randomly sample a patch. The sampled patch will have an aspect ratio between 1/2 and 2. Then it is resized to a fixed size and we flip one-half of the training data. 
 - Color distortions.
 
