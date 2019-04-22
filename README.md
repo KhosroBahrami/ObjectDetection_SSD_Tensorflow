@@ -228,13 +228,15 @@ Localization loss: This measures how far away the network’s predicted bounding
 Confidence loss: is the claccification loss which is the softmax loss over multiple classes confidences. This measures the confident of the network in objectness of the computed bounding box. Categorical cross-entropy is used to compute this loss.
 The confidence loss is the loss in making a class prediction. For every positive match prediction, we penalize the loss according to the confidence score of the corresponding class. For negative match predictions, we penalize the loss according to the confidence score of the class 0 (no object is detected).
 
+Then, the final loss is calculated as the weighted average of confidenec loss and loclization loss:
+
 multibox_loss = 1/N *(confidence_loss + α * location_loss)
 
 where N is the number of positive match and α is the weight for the localization loss.
 
 
 ### Non Maxmimum Supression (NMS)
-Given the large number of boxes generated during a forward pass of SSD at inference time, it is essential to prune most of the bounding box by applying a technique known as non-maximum suppression (NMS). in NMS, the boxes with a confidence loss threshold less than ct (e.g. 0.01) and IoU less than lt (e.g. 0.45) are discarded, and only the top N predictions are kept. This ensures only the most likely predictions are retained by the network, while the more noisier ones are removed.
+Given the large number of boxes generated during a forward pass of SSD at inference time, it is essential to prune most of the bounding box by applying a technique known as non-maximum suppression (NMS). In NMS, the boxes with a confidence loss threshold less than ct (e.g. 0.01) and IoU less than lt (e.g. 0.45) are discarded, and only the top N predictions are kept. This ensures only the most likely predictions are retained by the network, while the more noisier ones are removed.
 
 
 
