@@ -26,7 +26,7 @@ pip install opencv-python  # Opencv for processing images
 
 
 ## Datasets
-For training & testing, I used Pascal VOC datasets (2007 and 2012). 
+For training & testing, Pascal VOC datasets was used (2007 and 2012). 
 To prepare the datasets:
 1. Download VOC2007 and VOC2012 datasets. I assume the data is stored in /datasets/
 ```
