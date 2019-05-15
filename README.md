@@ -207,7 +207,7 @@ To address this problem, SSD uses Hard Negative Mining (HNM). In HNM, all backgr
 
 
 ### Matching Prior and Ground-truth bounding boxes
-SSD predictions are classified as positive matches or negative matches. SSD only uses positive matches in calculating the localization cost (the mismatch of the boundary box). If the corresponding default boundary box (not the predicted boundary box) has an IoU greater than 0.5 with the ground truth, the match is positive. Otherwise, it is negative. 
+SSD predictions are classified as positive matches or negative matches. SSD only uses positive matches in calculating the localization cost (the mismatch of the boundary box). If the corresponding default boundary box (not the predicted boundary box) has an IoU greater than 0.5 with the ground-truth, the match is positive. Otherwise, it is negative. 
 
 
 
@@ -225,7 +225,7 @@ In SSD, multibox loss function is the combination of localization loss (regressi
 
 Localization loss: This measures how far away the network’s predicted bounding boxes are from the ground-truth ones. It is the smooth L1 (L2) loss between the predicted box (l) and the ground-truth box (g) parameters. These parameters include offsets of the center point (cx, cy), width (w) and height (h) of the bounding box. This loss is similar to the one in Faster R-CNN. The localization loss is the mismatch between the ground-truth box and the predicted boundary box. SSD only penalizes predictions from positive matches. The goal is the predictions from the positive matches to be closer to the ground-truth. Negative matches are ignored for localization loss calculations.
 
-Confidence loss: is the claccification loss which is the softmax loss over multiple classes confidences. This measures the confident of the network in objectness of the computed bounding box. Categorical cross-entropy is used to compute this loss.
+Confidence loss: is the classification loss which is the softmax loss over multiple classes confidences. This measures the confident of the network in objectness of the computed bounding box. Categorical cross-entropy is used to compute this loss.
 The confidence loss is the loss in making a class prediction. For every positive match prediction, we penalize the loss according to the confidence score of the corresponding class. For negative match predictions, we penalize the loss according to the confidence score of the class 0 (no object is detected).
 
 Then, the final loss is calculated as the weighted average of confidenec loss and loclization loss:
