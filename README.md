@@ -2,7 +2,7 @@
 
 This is a TensorFlow implementation of the Single Shot Detector (SSD) for object detection. 
 
-Single Shot Detector (SSD) has been originally published in this research [paper](https://arxiv.org/abs/1512.02325). This repository contains a TensorFlow re-implementation of SSD which is inspired by the previous caffe and tensorflow implementations. However, this code has clear pipelines for train, test, demo and deployment using c++; it is modular that can be extended or can be used for new applications; and also supports 7 backbone networks. The backbone networks include VGG, ResnetV1, ResnetV2, MobilenetV1, MobilenetV2, InceptionV4, InceptionResnetV2.
+Single Shot Detector (SSD) has been originally published in this research [paper](https://arxiv.org/abs/1512.02325). This repository contains a TensorFlow re-implementation of SSD which is inspired by the previous caffe and tensorflow implementations. However, this code has clear pipelines for train, test, demo and deployment using C++; it is modular that can be extended or can be used for new applications; and also supports 7 backbone networks. The backbone networks include VGG, ResnetV1, ResnetV2, MobilenetV1, MobilenetV2, InceptionV4, InceptionResnetV2.
 
 I will explain the details of using these backbones in SSD object detection, at the end of this document.  
 
@@ -121,6 +121,7 @@ The Training module has the following 4 steps:
 
 ## Deployement of SSD
 In deployement folder, there is C++ implementation of SSD based on tensorflow. It uses MobileNet_V1 for object tracking in video stream from input camera. 
+To compile the c++ code with tensorflow, bazel compiler was used. 
 
 
 # How SSD works?
