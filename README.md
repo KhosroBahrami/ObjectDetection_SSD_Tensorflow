@@ -120,7 +120,7 @@ The Training module has the following 4 steps:
 
 
 ## Deployement of SSD
-In deployement folder there is C++ implementation of SSD which used MobileNet_V1 for obeject tracking in video stream from input camera. 
+In deployement folder, there is C++ implementation of SSD based on tensorflow. It uses MobileNet_V1 for object tracking in video stream from input camera. 
 
 
 # How SSD works?
