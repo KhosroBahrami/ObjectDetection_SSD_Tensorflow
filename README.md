@@ -121,7 +121,14 @@ The Training module has the following 4 steps:
 
 ## Deployement of SSD
 In deployement folder, there is C++ implementation of SSD based on tensorflow. It uses MobileNet_V1 for object tracking in video stream from input camera. 
-To compile the c++ code with tensorflow, bazel compiler was used. 
+To run the model on a new platform, do the follwing steps:
+- Install tensorflow for c++.
+- Install opencv for c++.
+- Create a folder in 'deployment' called 'model'
+- Download and copy the SSD MobileNetV1 to the 'model'
+- Compile & run the c++ code using bazel.
+
+
 
 
 # How SSD works?
