@@ -193,7 +193,7 @@ The number of prior boxes is calculated as follow. For VGG16 as backbone, 6 feat
 At Conv4_3, feature map is of size 38×38×512. There are 4 bounding boxes for each location in the map and each bounding box has (Cn + Ln) outputs, where Cn is number of classes and Ln is number of parameters for localization (x, y, w, h). Thus, at Conv4_3, the output has 38×38×4×(Cn+4) values. Suppose there are 20 object classes plus one background class, the output has 38×38×4×(21+4) = 144,400 values. 
 
 In terms of number of bounding boxes, there are 38×38×4 = 5776 bounding boxes for 6 feature maps.
-Therefore, for different feature maps, we can calculate the number of on bounding boxes as 
+Therefore, for different feature maps, we can calculate the number of bounding boxes as 
 - Conv4_3: 38×38×4 = 5776 boxes (4 boxes for each location)
 - Conv7: 19×19×6 = 2166 boxes (6 boxes for each location)
 - Conv8_2: 10×10×6 = 600 boxes (6 boxes for each location)
