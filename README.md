@@ -238,7 +238,7 @@ Localization loss: This measures how far away the network’s predicted bounding
 Confidence loss: is the classification loss which is the softmax loss over multiple classes confidences. This measures the confident of the network in objectness of the computed bounding box. Categorical cross-entropy is used to compute this loss.
 The confidence loss is the loss in making a class prediction. For every positive match prediction, we penalize the loss according to the confidence score of the corresponding class. For negative match predictions, we penalize the loss according to the confidence score of the class 0 (no object is detected).
 
-Then, the final loss is calculated as the weighted average of confidenec loss and loclization loss:
+Then, the final loss is calculated as the weighted average of confidence loss and localization loss:
 
 multibox_loss = 1/N *(confidence_loss + α * location_loss)
 
